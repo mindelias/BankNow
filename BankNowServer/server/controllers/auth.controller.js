@@ -22,6 +22,14 @@ export const createUser = async (req, res, next) => {
     next(error);
   }
 };
+ // Get Validated Users
+export async function getLoggedUsers(req, res, next) {
+ 
+  const user = await db.User.findOne({ where: { id:req.token.id } });
+  return res
+  .status(httpStatus.OK)
+  .json(sendResponse(httpStatus.OK, "success", user, null));
+}
 
 export const loginUser = async (req, res, next) => {
   let { email } = req.body;

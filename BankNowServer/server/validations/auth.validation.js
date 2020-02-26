@@ -47,6 +47,18 @@ const userValidation = {
         .invalid("")
         .required()
     }
+  },
+  reset: {
+    body: {
+      confirmPassword: Joi.string().required(),
+      password: Joi.string()
+        .min(6)
+        .max(255)
+        .invalid("")
+        .required(),
+
+       
+    }
   }
 };
 

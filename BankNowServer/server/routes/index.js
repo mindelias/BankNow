@@ -1,5 +1,7 @@
 import { Router } from "express";
 import authRoutes from "../routes/auth.routes";
+import emailRoutes from "../routes/email.routes";
+import accountRoutes from "../routes/accountRoutes";
 
 const router = Router();
 
@@ -9,5 +11,9 @@ router.get("/health-check", (_req, res) =>
 );
 
 router.use("/auth", authRoutes);
+router.use("/reset", emailRoutes);
+router.use("/account", accountRoutes);
+
+
 
 export default router;

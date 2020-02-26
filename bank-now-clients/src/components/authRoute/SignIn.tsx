@@ -17,7 +17,7 @@ const SignIn: React.FC<props> = ({ reg, Auth }) => {
     console.log(Auth);
     console.log("work sharply");
     if (Auth == true) {
-      history.push("/login");
+      history.push("/dashboard");
     }
   }, [reg, Auth]);
   // const []

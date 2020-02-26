@@ -19,6 +19,7 @@ const SignUp: React.FC<props> = ({ reg, Auth }) => {
     if (Auth == true) {
       history.push("/login");
     }
+    
   }, [reg,Auth]); 
   // const []
   const [user, setUser] = useState({

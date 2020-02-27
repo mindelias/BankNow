@@ -7,7 +7,7 @@ interface formData {
   AccounType: string;
    
 }
-interface MoneyType {
+interface AmountType {
   amount: string;
    
 }
@@ -58,7 +58,7 @@ export const CreateAcc =  (data:formData) => async(dispatch:any) =>{
     }
   };
 
-  export const AddMoney =  (data:MoneyType) => async(dispatch:any) =>{
+  export const AddMoney =  (data:AmountType) => async(dispatch:any) =>{
    
     const config = {
       headers: {
@@ -73,7 +73,7 @@ export const CreateAcc =  (data:formData) => async(dispatch:any) =>{
         payload: res.data
       });
 
-      //  loadUsers();
+  
     } catch (error) {
       dispatch({
         type: ADD_FAIL,

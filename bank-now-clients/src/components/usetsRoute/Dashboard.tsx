@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import profile from "../assets/avatar.png";
 import circle from "../assets/circle.jpg";
 import MainNav from "../MainNav";
 import { connect } from "react-redux";
 import { loadUser } from "../redux/Auth/Auth.action";
-import { loadAccount } from "../redux/Account/Account.action";
+import { loadAccount, AddMoney } from "../redux/Account/Account.action";
 
 interface props {
   // reg: (args: any) => void;
@@ -14,14 +14,39 @@ interface props {
   isAccount: boolean;
   load: () => void;
   loadAcc: () => void;
+  AddCash: (args:any) => void;
 }
 
 // const CreateAccount: React.FC<props> = ({ reg, load, userDet, isAccount }) => {
-const Dashboard: React.FC<props> = ({ load, userDet, user, loadAcc }) => {
+const Dashboard: React.FC<props> = ({ load, userDet, user, loadAcc, AddCash }) => {
   useEffect(() => {
     load();
     loadAcc();
   }, []);
+  const [show, setShow] = useState(false);
+
+  const showModal = () => {
+    setShow(true);
+    console.log("displayed");
+  };
+
+  const hideModal = () => {
+    setShow(false);
+  };
+   
+  const [money, setMoney] = useState({
+    amount: ""
+  });
+  const { amount} =  money;
+  const AddMoneyAcct = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(user);
+
+    AddCash(money);
+  };
+  const onchangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMoney({ amount: e.target.value });
+  };
 
   console.log(userDet);
   return (
@@ -58,7 +83,6 @@ const Dashboard: React.FC<props> = ({ load, userDet, user, loadAcc }) => {
                   Notifications{" "}
                   <span className="badge badge-lg badge-danger">5</span>
                 </li>
-                 
               </ul>
               <h2 className="text-center"> Dashboard </h2>
               <hr />
@@ -112,25 +136,72 @@ const Dashboard: React.FC<props> = ({ load, userDet, user, loadAcc }) => {
                 <div className="col-9 ">
                   <div className="row br2">
                     <div className="col-4">Name: {user && user.fullName} </div>
-                    <div className="col-4">Accound id: {userDet && userDet.id} </div>
+                    <div className="col-4">
+                      Accound id: {userDet && userDet.id}{" "}
+                    </div>
                     <div className="col-4">Email: {user && user.email}</div>
                   </div>
                 </div>
               </div>
+
               <div className="middle">
+                {show && (
+                  <div className="card">
+                    <div className="card-header">
+                      <div className="row">
+                        <div className="col-10">Add Money here</div>
+                        <button className="col-2 btn-info" onClick={hideModal}>
+                          <i className="far fa-window-close "></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div className="card-body">
+                      <form className="" onSubmit={AddMoneyAcct}>
+                        <div className="form-group">
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="id"
+                            placeholder="Enter amount"
+                            name="amount"
+                            value={amount}
+                             onChange={onchangeInput}
+                          />
+                        </div>
+                        <button
+                          type="submit"
+                          className="btn btn-info btn-block"
+                          
+                        >
+                          ADD
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                )}
+
                 <div className="row">
                   <div className="col-6">
                     <h3>Overview</h3>
                   </div>
+
                   <div className="col-6">
-                    <button className="btn btn-primary mr-4">Add Money</button>
+                    <button
+                      className="btn btn-primary mr-4"
+                      onClick={showModal}
+                    >
+                      Add Money
+                    </button>
+
+                    {/* modal body displayed */}
+
                     {/* <button className="btn  btn-danger">Withdrawal</button> */}
                     <button className="btn  btn-danger">Transfer</button>
                   </div>
                 </div>
                 <div className="row">
                   <div className="cards bg-purple col-4 text-white">
-                    <h5> Balance:  #{userDet && userDet.accountBalance}</h5>
+                    <h5> Balance: #{userDet && userDet.accountBalance}</h5>
                   </div>
                   <div className="cards bg-orange col-4 text-white">
                     <h5> Rate of Interest : 2%</h5>
@@ -139,7 +210,7 @@ const Dashboard: React.FC<props> = ({ load, userDet, user, loadAcc }) => {
               </div>
               <div className="row">
                 <div className="col-10 my-3">Recent Transations</div>
-                
+
                 <button className="col-2 mt-3">View All</button>
               </div>
             </div>
@@ -157,7 +228,8 @@ const mapStateToProps = (state: any) => ({
 
 export default connect(mapStateToProps, {
   load: loadUser,
-  loadAcc: loadAccount
+  loadAcc: loadAccount,
+  AddCash: AddMoney
 })(Dashboard);
 // export default Dashboard;
 

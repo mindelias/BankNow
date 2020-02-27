@@ -3,13 +3,16 @@ import {
   AUTH_ERROR,
   ACCOUNT_LOADED,
   CREATE_SUCCESS,
-  CREATE_FAIL
+  CREATE_FAIL,
+  ADD_SUCCESS,
+  ADD_FAIL
 } from "../types";
 
 const initialState = {
   user: null,
   isAccount: false,
   loading: false,
+  isUpdated: false,
   error: null
 };
 
@@ -32,12 +35,24 @@ function AccountReducer(state = initialState, action: any) {
         loading: false,
         error: false
       };
-
-    case CREATE_FAIL:
-      case AUTH_ERROR:
+    case ADD_SUCCESS:
       return {
         ...state,
-        isAccount:false,
+        // ...action.payload,
+        user: action.payload.payload,
+        isAccount: true,
+        isUpdated: true,
+        loading: false,
+        error: false
+      };
+
+    case CREATE_FAIL:
+    case ADD_FAIL:
+    case AUTH_ERROR:
+      return {
+        ...state,
+        isAccount: false,
+
         loading: false,
         user: null,
         error: action.payload

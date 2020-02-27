@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import financee from "../assets/finance.svg";
 import { connect } from "react-redux";
 import { Register, Login } from "../redux/Auth/Auth.action";
+import MainNav from "../MainNav";
 // import styled from 'styled-components'
 
 interface props {
@@ -30,7 +31,7 @@ const SignIn: React.FC<props> = ({ reg, Auth }) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(user);
-    console.log("this is a jam", Auth);
+    // console.log("this is a jam", Auth);
     reg(user);
   };
   const onchangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,44 +41,47 @@ const SignIn: React.FC<props> = ({ reg, Auth }) => {
   // html view
 
   return (
-    <LoginWrapper className="container">
-      <div className="row">
-        <div className="col-6 bg-right text-center">
-          <h3>Welcome to </h3>
-          <img src={financee} />
-        </div>
-        <div className="formview col-6">
-          <form className="" onSubmit={handleSubmit}>
-            <div className="form-group">
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                placeholder="Enter email"
-                name="email"
-                value={email}
-                onChange={onchangeInput}
-              />
-            </div>
+    <div>
+      <MainNav />
+      <LoginWrapper className="container">
+        <div className="row">
+          <div className="col-6 bg-right text-center">
+            <h3>Welcome to </h3>
+            <img src={financee} />
+          </div>
+          <div className="formview col-6">
+            <form className="" onSubmit={handleSubmit}>
+              <div className="form-group">
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  placeholder="Enter email"
+                  name="email"
+                  value={email}
+                  onChange={onchangeInput}
+                />
+              </div>
 
-            <div className="form-group">
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Enter password"
-                name="password"
-                value={password}
-                onChange={onchangeInput}
-              />
-            </div>
+              <div className="form-group">
+                <input
+                  type="password"
+                  className="form-control"
+                  placeholder="Enter password"
+                  name="password"
+                  value={password}
+                  onChange={onchangeInput}
+                />
+              </div>
 
-            <button type="submit" className="btn btn-info btn-block">
-              Login
-            </button>
-          </form>
+              <button type="submit" className="btn btn-info btn-block">
+                Login
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
-    </LoginWrapper>
+      </LoginWrapper>
+    </div>
   );
 };
 const mapStateToProps = (state: any) => ({

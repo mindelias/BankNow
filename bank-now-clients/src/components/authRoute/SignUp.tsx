@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import financee from "../assets/finance.svg";
 import { connect } from "react-redux";
 import { Register } from "../redux/Auth/Auth.action";
+import MainNav from "../MainNav";
 // import styled from 'styled-components'
 
 interface props {
@@ -14,13 +15,13 @@ interface props {
 const SignUp: React.FC<props> = ({ reg, Auth }) => {
   const history = useHistory();
   useEffect(() => {
-    console.log(Auth);
-    console.log("work sharply")
+    // console.log(Auth);
+    // console.log("work sharply")
     if (Auth == true) {
-      history.push("/login");
+      history.push("/dashboard");
     }
     
-  }, [reg,Auth]); 
+  }, [reg, Auth]); 
   // const []
   const [user, setUser] = useState({
     fullName: "",
@@ -44,6 +45,8 @@ const SignUp: React.FC<props> = ({ reg, Auth }) => {
   // html view
 
   return (
+    <div>
+      <MainNav/>
     <LoginWrapper className="container">
       <div className="row">
         <div className="col-6 bg-right text-center">
@@ -114,6 +117,7 @@ const SignUp: React.FC<props> = ({ reg, Auth }) => {
         </div>
       </div>
     </LoginWrapper>
+    </div>
   );
 };
 const mapStateToProps = (state: any ) => ({

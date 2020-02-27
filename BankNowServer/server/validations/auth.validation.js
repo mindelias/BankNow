@@ -55,9 +55,23 @@ const userValidation = {
         .min(6)
         .max(255)
         .invalid("")
-        .required(),
-
-       
+        .required()
+    }
+  },
+  createAcc: {
+    body: {
+      accountType: Joi.string().required()
+    }
+  },
+  deposit: {
+    body: {
+      amount: Joi.string().required()
+    }
+  },
+  transfer: {
+    body: {
+      amount: Joi.string().required(),
+      accountNumber: Joi.string().required()
     }
   }
 };

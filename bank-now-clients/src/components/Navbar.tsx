@@ -14,7 +14,7 @@ function Navbar() {
                     <span className="fa fa-recycle ml"></span>BankNow
                   </a>
                 </h1>
-              </div>
+              </div>  
 
               <div className="w3pvt-bg">
                 <div className="nav_w3pvt">

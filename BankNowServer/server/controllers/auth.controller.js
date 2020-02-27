@@ -24,11 +24,17 @@ export const createUser = async (req, res, next) => {
 };
  // Get Validated Users
 export async function getLoggedUsers(req, res, next) {
- 
-  const user = await db.User.findOne({ where: { id:req.token.id } });
+  try {
+    const user = await db.User.findOne({ where: { id:req.token.id } });
   return res
   .status(httpStatus.OK)
   .json(sendResponse(httpStatus.OK, "success", user, null));
+    
+  } catch (error) {
+    next(error)
+  }
+ 
+  
 }
 
 export const loginUser = async (req, res, next) => {

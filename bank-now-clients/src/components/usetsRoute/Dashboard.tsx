@@ -1,22 +1,29 @@
-import React , {useEffect} from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import profile from "../assets/avatar.png";
 import circle from "../assets/circle.jpg";
 import MainNav from "../MainNav";
-import { connect } from 'react-redux'
-import {loadUser} from '../redux/Auth/Auth.action'
-
+import { connect } from "react-redux";
+import { loadUser } from "../redux/Auth/Auth.action";
+import { loadAccount } from "../redux/Account/Account.action";
 
 interface props {
-  reg: () => void;
-  Auth: boolean;
+  // reg: (args: any) => void;
+  userDet: any;
+  user: any;
+  isAccount: boolean;
+  load: () => void;
+  loadAcc: () => void;
 }
-const Dashboard : React.FC<props> = ({reg, Auth}) => {
 
+// const CreateAccount: React.FC<props> = ({ reg, load, userDet, isAccount }) => {
+const Dashboard: React.FC<props> = ({ load, userDet, user, loadAcc }) => {
   useEffect(() => {
-    reg();
+    load();
+    loadAcc();
   }, []);
 
+  console.log(userDet);
   return (
     <div>
       <MainNav />
@@ -24,7 +31,7 @@ const Dashboard : React.FC<props> = ({reg, Auth}) => {
         <div className="container">
           <div className="row">
             <div className="col-3 sideBar text-white">
-              <h2 className="text-center"> Hi Abiola </h2>
+              <h2 className="text-center"> profile and Settings </h2>
               <hr />
               <ul>
                 <li>
@@ -32,6 +39,10 @@ const Dashboard : React.FC<props> = ({reg, Auth}) => {
                     <i className="fas fa-sort-numeric-down"></i>
                   </span>{" "}
                   Account Number
+                  <h5 className="ml-4 text-warning">
+                    {" "}
+                    # {userDet && userDet.accountNumber}
+                  </h5>
                 </li>
                 <li>
                   <span>
@@ -47,12 +58,7 @@ const Dashboard : React.FC<props> = ({reg, Auth}) => {
                   Notifications{" "}
                   <span className="badge badge-lg badge-danger">5</span>
                 </li>
-                <li>
-                  <span>
-                    <i className="fas fa-sign-out-alt"></i>
-                  </span>{" "}
-                  Logout
-                </li>
+                 
               </ul>
               <h2 className="text-center"> Dashboard </h2>
               <hr />
@@ -105,9 +111,9 @@ const Dashboard : React.FC<props> = ({reg, Auth}) => {
                 <img className="col-3" src={profile} width="15em" />
                 <div className="col-9 ">
                   <div className="row br2">
-                    <div className="col-4">First Name: Aminat </div>
-                    <div className="col-4">Last Name: Shotade </div>
-                    <div className="col-4">Email: Shotadeyetunde@gmail.com</div>
+                    <div className="col-4">Name: {user && user.fullName} </div>
+                    <div className="col-4">Accound id: {userDet && userDet.id} </div>
+                    <div className="col-4">Email: {user && user.email}</div>
                   </div>
                 </div>
               </div>
@@ -117,22 +123,24 @@ const Dashboard : React.FC<props> = ({reg, Auth}) => {
                     <h3>Overview</h3>
                   </div>
                   <div className="col-6">
-                    <button className="btn btn-primary mr-5">Deposit</button>
-                    <button className="btn  btn-danger">Withdrawal</button>
+                    <button className="btn btn-primary mr-4">Add Money</button>
+                    {/* <button className="btn  btn-danger">Withdrawal</button> */}
+                    <button className="btn  btn-danger">Transfer</button>
                   </div>
                 </div>
                 <div className="row">
                   <div className="cards bg-purple col-4 text-white">
-                    <h4> Balance(#): 280000</h4>
+                    <h5> Balance:  #{userDet && userDet.accountBalance}</h5>
                   </div>
                   <div className="cards bg-orange col-4 text-white">
-                    <h4> Rate of Interest : 2%</h4>
+                    <h5> Rate of Interest : 2%</h5>
                   </div>
                 </div>
               </div>
               <div className="row">
                 <div className="col-10 my-3">Recent Transations</div>
-                <a className="col-2 mt-3">View All</a>
+                
+                <button className="col-2 mt-3">View All</button>
               </div>
             </div>
           </div>
@@ -140,22 +148,27 @@ const Dashboard : React.FC<props> = ({reg, Auth}) => {
       </Wrapper>
     </div>
   );
-}
-const mapStateToProps = (state: any ) => ({
-  Auth: state.Auth.isAuthenticated 
+};
+const mapStateToProps = (state: any) => ({
+  userDet: state.Account.user,
+  isAccount: state.Account.isAccount,
+  user: state.Auth.user
 });
 
-export default connect(mapStateToProps, { reg: loadUser })(Dashboard);
+export default connect(mapStateToProps, {
+  load: loadUser,
+  loadAcc: loadAccount
+})(Dashboard);
 // export default Dashboard;
 
 const Wrapper = styled.div`
-  background: linear-gradient(106deg, #c1b0e8 0%, #8c2bb5 150%);
+  background: linear-gradient(106deg, #ebfcff 0%, #f0f8ff 150%);
   /* background:  #C1B0E8; */
   background-size: cover;
   /* height: 100vh; */
   padding: 4rem;
   .sideBar {
-    background: linear-gradient(180deg, #6a0080 10%, #e600e6 90%);
+    background: linear-gradient(180deg, #0048ba 0%, #e600e6 80%);
     /* height: 90vh; */
     padding: 2rem 1rem;
   }
@@ -169,6 +182,7 @@ const Wrapper = styled.div`
     background: white;
     /* height: 90vh; */
     padding: 4em 2em;
+    box-shadow: 2px 2px 2px gray;
   }
   hr {
     height: 1.2px;
@@ -207,7 +221,7 @@ const Wrapper = styled.div`
   }
 
   .btn-primary {
-    background: linear-gradient(106deg, #aa00ff 0%, #6c4fff 100%);
+    background: linear-gradient(106deg, #0048ba 0%, #6c4fff 100%);
     border: 1px solid #475677;
     border-radius: 25px;
     padding: 8px 38px;
@@ -222,7 +236,7 @@ const Wrapper = styled.div`
     height: 10em;
     padding: 4em 2em;
     border-radius: 8px;
-    margin: 1.5em 3em;
+    margin: 2.3em 3em;
   }
   .bg-purple {
     background: linear-gradient(
@@ -236,10 +250,10 @@ const Wrapper = styled.div`
 
   .bg-orange {
     background: linear-gradient(
-        106deg,
-        rgb(229, 43, 80, 0.7),
-        rgb(250, 0, 54, 0.7),
-        rgb(227, 38, 104, 0.7)
+        110deg,
+        rgb(227, 50, 221, 1),
+        rgb(227, 64, 64, 0.8),
+        rgb(175, 0, 42, 1)
       ),
       url(${circle});
   }

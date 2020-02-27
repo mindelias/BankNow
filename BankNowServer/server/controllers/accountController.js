@@ -28,6 +28,17 @@ export const creatAccount = async (req, res, next) => {
   }
 };
 
+export async function getAccounDetails(req, res, next) {
+  try {
+    const user = await db.Account.findOne({ where: { userId: req.token.id } });
+    return res
+      .status(httpStatus.OK)
+      .json(sendResponse(httpStatus.OK, "success", user, null));
+  } catch (error) {
+    next(error);
+  }
+}
+
 export const deposit = async (req, res, next) => {
   let { amount } = req.body;
   let userId = req.token.id;

@@ -14,7 +14,7 @@ const initialState = {
   users: [],
   user: null,
   isAuthenticated: null,
-  loading: true,
+  loading: false,
   error: null
 };
 

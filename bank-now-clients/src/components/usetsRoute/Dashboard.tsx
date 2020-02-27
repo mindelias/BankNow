@@ -1,135 +1,152 @@
-import React from "react";
+import React , {useEffect} from "react";
 import styled from "styled-components";
 import profile from "../assets/avatar.png";
 import circle from "../assets/circle.jpg";
-import bluewavy from "../assets/bluewavy.jpg";
-import green from "../assets/green.jpg";
+import MainNav from "../MainNav";
+import { connect } from 'react-redux'
+import {loadUser} from '../redux/Auth/Auth.action'
 
-function Dashboard() {
+
+interface props {
+  reg: () => void;
+  Auth: boolean;
+}
+const Dashboard : React.FC<props> = ({reg, Auth}) => {
+
+  useEffect(() => {
+    reg();
+  }, []);
+
   return (
-    <Wrapper>
-      <div className="container">
-        <div className="row">
-          <div className="col-3 sideBar text-white">
-            <h2 className="text-center"> Hi Abiola </h2>
-            <hr />
-            <ul>
-              <li>
-                <span>
-                  <i className="fas fa-sort-numeric-down"></i>
-                </span>{" "}
-                Account Number
-              </li>
-              <li>
-                <span>
-                  <i className="fas fa-lock"></i>
-                </span>{" "}
-                Authentication
-              </li>
-              <li>
-                {" "}
-                <span>
-                  <i className="fas fa-bell"></i>
-                </span>
-                Notifications{" "}
-                <span className="badge badge-lg badge-danger">5</span>
-              </li>
-              <li>
-                <span>
-                  <i className="fas fa-sign-out-alt"></i>
-                </span>{" "}
-                Logout
-              </li>
-            </ul>
-            <h2 className="text-center"> Dashboard </h2>
-            <hr />
-            <ul>
-              <li>
-                <span>
-                  <i className="fas fa-history"></i>
-                </span>{" "}
-                Transaction History
-              </li>
-              <li>
-                <span>
-                  <i className="fas fa-tasks"></i>
-                </span>{" "}
-                Manage Accounts
-              </li>
-              <li>
-                <span>
-                  <i className="fas fa-cog"></i>
-                </span>{" "}
-                Settings
-              </li>
-            </ul>
+    <div>
+      <MainNav />
+      <Wrapper>
+        <div className="container">
+          <div className="row">
+            <div className="col-3 sideBar text-white">
+              <h2 className="text-center"> Hi Abiola </h2>
+              <hr />
+              <ul>
+                <li>
+                  <span>
+                    <i className="fas fa-sort-numeric-down"></i>
+                  </span>{" "}
+                  Account Number
+                </li>
+                <li>
+                  <span>
+                    <i className="fas fa-lock"></i>
+                  </span>{" "}
+                  Authentication
+                </li>
+                <li>
+                  {" "}
+                  <span>
+                    <i className="fas fa-bell"></i>
+                  </span>
+                  Notifications{" "}
+                  <span className="badge badge-lg badge-danger">5</span>
+                </li>
+                <li>
+                  <span>
+                    <i className="fas fa-sign-out-alt"></i>
+                  </span>{" "}
+                  Logout
+                </li>
+              </ul>
+              <h2 className="text-center"> Dashboard </h2>
+              <hr />
+              <ul>
+                <li>
+                  <span>
+                    <i className="fas fa-history"></i>
+                  </span>{" "}
+                  Transaction History
+                </li>
+                <li>
+                  <span>
+                    <i className="fas fa-tasks"></i>
+                  </span>{" "}
+                  Manage Accounts
+                </li>
+                <li>
+                  <span>
+                    <i className="fas fa-cog"></i>
+                  </span>{" "}
+                  Settings
+                </li>
+              </ul>
 
-            <h2 className="text-center"> Profile </h2>
-            <hr />
-            <ul>
-              <li>
-                <span>
-                  <i className="far fa-credit-card"></i>
-                </span>{" "}
-                Deposit
-              </li>
-              <li>
-                <span>
-                  <i className="fas fa-donate"></i>
-                </span>{" "}
-                Loans
-              </li>
-              <li>
-                <span>
-                  <i className="fas fa-money-check-alt"></i>
-                </span>{" "}
-                Invest
-              </li>
-            </ul>
-          </div>
-          <div className="col-9 mainCont">
-            <div className="row">
-              <img className="col-3" src={profile} width="15em" />
-              <div className="col-9 ">
-                <div className="row br2">
-                  <div className="col-4">First Name: Aminat </div>
-                  <div className="col-4">Last Name: Shotade </div>
-                  <div className="col-4">Email: Shotadeyetunde@gmail.com</div>
-                </div>
-              </div>
+              <h2 className="text-center"> Profile </h2>
+              <hr />
+              <ul>
+                <li>
+                  <span>
+                    <i className="far fa-credit-card"></i>
+                  </span>{" "}
+                  Deposit
+                </li>
+                <li>
+                  <span>
+                    <i className="fas fa-donate"></i>
+                  </span>{" "}
+                  Loans
+                </li>
+                <li>
+                  <span>
+                    <i className="fas fa-money-check-alt"></i>
+                  </span>{" "}
+                  Invest
+                </li>
+              </ul>
             </div>
-            <div className="middle">
+            <div className="col-9 mainCont">
               <div className="row">
-                <div className="col-6">
-                  <h3>Overview</h3>
+                <img className="col-3" src={profile} width="15em" />
+                <div className="col-9 ">
+                  <div className="row br2">
+                    <div className="col-4">First Name: Aminat </div>
+                    <div className="col-4">Last Name: Shotade </div>
+                    <div className="col-4">Email: Shotadeyetunde@gmail.com</div>
+                  </div>
                 </div>
-                <div className="col-6">
-                  <button className="btn btn-primary mr-5">Deposit</button>
-                  <button className="btn  btn-danger">Withdrawal</button>
+              </div>
+              <div className="middle">
+                <div className="row">
+                  <div className="col-6">
+                    <h3>Overview</h3>
+                  </div>
+                  <div className="col-6">
+                    <button className="btn btn-primary mr-5">Deposit</button>
+                    <button className="btn  btn-danger">Withdrawal</button>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="cards bg-purple col-4 text-white">
+                    <h4> Balance(#): 280000</h4>
+                  </div>
+                  <div className="cards bg-orange col-4 text-white">
+                    <h4> Rate of Interest : 2%</h4>
+                  </div>
                 </div>
               </div>
               <div className="row">
-                <div className="cards bg-purple col-4 text-white">
-                  <h4> Balance(#): 280000</h4>
-                </div>
-                <div className="cards bg-orange col-4 text-white">
-                  <h4> Rate of Interest : 2%</h4>
-                </div>
+                <div className="col-10 my-3">Recent Transations</div>
+                <a className="col-2 mt-3">View All</a>
               </div>
-            </div>
-            <div className = 'row'>
-                <div className = 'col-10 my-3'>Recent Transations</div>
-                <a className = 'col-2 mt-3'>View All</a>
-
             </div>
           </div>
         </div>
-      </div>
-    </Wrapper>
+      </Wrapper>
+    </div>
   );
 }
+const mapStateToProps = (state: any ) => ({
+  Auth: state.Auth.isAuthenticated 
+});
 
-export default Dashboard;
+export default connect(mapStateToProps, { reg: loadUser })(Dashboard);
+// export default Dashboard;
 
 const Wrapper = styled.div`
   background: linear-gradient(106deg, #c1b0e8 0%, #8c2bb5 150%);

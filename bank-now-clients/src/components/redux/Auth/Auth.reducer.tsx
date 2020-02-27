@@ -10,9 +10,9 @@ import {
 } from "../types";
 
 const initialState = {
-  token:localStorage.getItem("Authorization"),
+  token: localStorage.getItem("Authorization"),
   users: [],
-  user: {},
+  user: null,
   isAuthenticated: null,
   loading: true,
   error: null
@@ -21,24 +21,18 @@ const initialState = {
 function AuthReduce(state = initialState, action: any) {
   switch (action.type) {
     case USER_LOADED:
+      console.log(action.payload)
       return {
         ...state,
         isAuthenticated: true,
         loading: false,
-        user: action.payload.data[0]
+        user: action.payload.payload
       };
-    case 'loading':
-        return{
-            ...state,
-            loading:true,
-        }
+
     case REGISTER_SUCCESS:
-      case LOGIN_SUCCESS:
-      localStorage.setItem(
-        "Authentication",
-        action.payload
-      );
-      // console.log(action.payload.token, "verfy token")
+    
+      localStorage.setItem("Authorization", action.payload);
+       console.log(action.payload, "verfy token")
       return {
         ...state,
         ...action.payload,
@@ -46,11 +40,11 @@ function AuthReduce(state = initialState, action: any) {
         loading: false,
         error: false
       };
-     case REGISTER_FAIL:
-    // case LOGIN_FAIL:
-    // case AUTH_ERROR:
-     case LOGOUT:
-      localStorage.removeItem("token");
+    case REGISTER_FAIL:
+    case LOGIN_FAIL:
+    case AUTH_ERROR:
+    case LOGOUT:
+      localStorage.removeItem("Authorization");
       return {
         ...state,
         token: null,
@@ -59,16 +53,16 @@ function AuthReduce(state = initialState, action: any) {
         user: null,
         error: action.payload
       };
-    // case LOGIN_SUCCESS:
-    //   localStorage.setItem("token", action.payload.data[0].token);
-    //   // console.log(action.payload.data[0].token, "verfy token");
-    //   return {
-    //     ...state,
-    //     ...action.payload,
-    //     isAuthenticated: true,
-    //     loading: false,
-    //     error: false
-    //   };
+    case LOGIN_SUCCESS:
+      localStorage.setItem("Authorization", action.payload);
+      console.log(action.payload, "verfy token");
+      return {
+        ...state,
+        ...action.payload,
+        isAuthenticated: true,
+        loading: false,
+        error: false
+      };
 
     default:
       return state;

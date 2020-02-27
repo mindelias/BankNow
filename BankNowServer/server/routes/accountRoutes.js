@@ -13,6 +13,9 @@ router.route("/").post(auth,
   validate(paramsValidation.createAcc, { abortEarly: false }),
   accountController.creatAccount
 );
+
+router.route("/").get(auth, accountController.getAccounDetails);
+
 router.route("/deposit").post(auth,
   validate(paramsValidation.deposit, { abortEarly: false }),
   accountController.deposit

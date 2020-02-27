@@ -1,60 +1,58 @@
 import React from "react";
 import {
   AUTH_ERROR,
-  REGISTER_FAIL,
-  REGISTER_SUCCESS,
-  LOGIN_FAIL,
-  LOGIN_SUCCESS,
-  LOGOUT,
-  USER_LOADED
+  ACCOUNT_LOADED,
+  CREATE_SUCCESS,
+  CREATE_FAIL,
+  ADD_SUCCESS,
+  ADD_FAIL
 } from "../types";
 
 const initialState = {
-  token:localStorage.getItem("Authorization"),
-  users: [],
-  user: {},
-  isAuthenticated: null,
-  loading: true,
+  user: null,
+  isAccount: false,
+  loading: false,
+  isUpdated: false,
   error: null
 };
 
 function AccountReducer(state = initialState, action: any) {
   switch (action.type) {
-    case USER_LOADED:
+    case ACCOUNT_LOADED:
       return {
         ...state,
-        isAuthenticated: true,
+        isAccount: true,
         loading: false,
-        user: action.payload.data[0]
+        user: action.payload.payload
       };
-    case 'loading':
-        return{
-            ...state,
-            loading:true,
-        }
-    case REGISTER_SUCCESS:
-      case LOGIN_SUCCESS:
-      localStorage.setItem(
-        "Authentication",
-        action.payload
-      );
-      // console.log(action.payload.token, "verfy token")
+
+    case CREATE_SUCCESS:
       return {
         ...state,
-        ...action.payload,
-        isAuthenticated: true,
+        // ...action.payload,
+        user: action.payload.payload,
+        isAccount: true,
         loading: false,
         error: false
       };
-     case REGISTER_FAIL:
-     case LOGIN_FAIL:
-    // case AUTH_ERROR:
-     case LOGOUT:
-      localStorage.removeItem("token");
+    case ADD_SUCCESS:
       return {
         ...state,
-        token: null,
-        isAuthenticated: false,
+        // ...action.payload,
+        user: action.payload.payload,
+        isAccount: true,
+        isUpdated: true,
+        loading: false,
+        error: false
+      };
+
+    case CREATE_FAIL:
+    case ADD_FAIL:
+    case AUTH_ERROR:
+      return {
+        ...state,
+        isAccount: false,
+
         loading: false,
         user: null,
         error: action.payload

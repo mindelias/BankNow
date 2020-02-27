@@ -20,7 +20,6 @@ interface formData {
 type loginData = Pick<formData, "email" | "password">;
 
 export const loadUser = () => async (dispatch: any) => {
-  console.log("kjhhjhjh", localStorage.getItem("Authorization"));
   if (localStorage.getItem("Authorization")) {
     setAuthToken(localStorage.getItem("Authorization")!);
   }
@@ -40,6 +39,7 @@ export const loadUser = () => async (dispatch: any) => {
     console.log(error.response);
   }
 };
+
 export const Register = (data: formData) => async (dispatch: any) => {
   dispatch({ type: "loading" });
   const config = {

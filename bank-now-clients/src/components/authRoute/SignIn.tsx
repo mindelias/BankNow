@@ -18,7 +18,7 @@ const SignIn: React.FC<props> = ({ reg, Auth }) => {
     console.log(Auth);
     console.log("work sharply");
     if (Auth == true) {
-      history.push("/dashboard");
+      history.push("/createacc");
     }
   }, [reg, Auth]);
   // const []
@@ -47,7 +47,7 @@ const SignIn: React.FC<props> = ({ reg, Auth }) => {
         <div className="row">
           <div className="col-6 bg-right text-center">
             <h3>Welcome to </h3>
-            <img src={financee} />
+            <img src={financee} alt = 'signin image'/>
           </div>
           <div className="formview col-6">
             <form className="" onSubmit={handleSubmit}>

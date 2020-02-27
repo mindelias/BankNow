@@ -15,7 +15,12 @@ import store from "./components/redux/store";
 import Signup from "./components/authRoute/SignUp";
 import SignIn from "./components/authRoute/SignIn";
 import Dashboard from "./components/usetsRoute/Dashboard";
+import CreateAccount from "./components/usetsRoute/CreateAccount";
+import setAuthToken from './utils/setAuthToken'
 
+if (localStorage.getItem("Authorization")) {
+  setAuthToken(localStorage.getItem("Authorization")!);
+}
 function App() {
   return (
     <Provider store={store}>
@@ -35,6 +40,10 @@ function App() {
             <Route exact path="/dashboard">
               <Dashboard />
             </Route>
+            <Route exact path="/createacc">
+              <CreateAccount/>
+            </Route>
+
           </Switch>
         </Router>
       </React.Fragment>

@@ -8,7 +8,7 @@ import { LogOut } from "./redux/Auth/Auth.action";
 interface props {
   logout: () => void;
   Auth: boolean;
-  user:any;
+  user: any;
 }
 
 const MainNav: React.FC<props> = ({ logout, Auth, user }) => {
@@ -18,16 +18,16 @@ const MainNav: React.FC<props> = ({ logout, Auth, user }) => {
     logout();
     history.push("/");
   };
-// const { fullName } = user
+  // const { fullName } = user
   const privateLinks = (
     <Fragment>
       {console.log(user)}
-      <li className="nav-item text-white">Welcome { user && user.fullName}</li>
-      <li className="nav-item text-white" onClick={logOut}>
-       
+      <li className="nav-item text-white">Welcome {user && user.fullName}</li>
+      <li className="nav-item " onClick={logOut}>
+        <Link to="/" className="text-white">
           <i className="fas fa-sign-out-alt"></i>
           <span className="hide-sm">Logout</span>
-        
+        </Link>
       </li>
       <li className="nav-item">
         <Link to="/dashboard" className="nav-link text-white">
@@ -60,7 +60,7 @@ const MainNav: React.FC<props> = ({ logout, Auth, user }) => {
         </h3> */}
         <div className="navbar-brand">
           <h1>
-            <span className="fa fa-recycle ml-4"></span> BankNow
+            <span className="fa fa-recycle ml-4 spani"></span> BankNow
           </h1>
         </div>
       </Link>
@@ -87,9 +87,9 @@ const NavWrapper = styled.nav`
   .navbar-brand {
     color: white !important;
     font-size: 1.6rem;
-    font-family:'Roboto'
+    font-family: "Roboto";
   }
-  span{
+  .spani {
     color: #fdbd10;
   }
   .nav-link {

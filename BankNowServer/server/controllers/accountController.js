@@ -11,7 +11,7 @@ export const creatAccount = async (req, res, next) => {
   const uuidNumber = uuidv4().split("-");
   const type = accountType === "savings" ? "Sav" : "Cur";
   let accountNumber = `${type}-${uuidNumber[0]}${uuidNumber[3]}`;
-  console.log(accountNumber);
+  // console.log(accountNumber);
 
   try {
     const account = await db.Account.create({
@@ -40,7 +40,7 @@ export async function getAccounDetails(req, res, next) {
 }
 
 export const deposit = async (req, res, next) => {
-  let { amount } = req.body;
+  let { Amount } = req.body;
   let userId = req.token.id;
   let transactionType = "credit";
 
@@ -48,15 +48,15 @@ export const deposit = async (req, res, next) => {
     const { accountBalance, accountNumber } = await db.Account.findOne({
       where: { userId }
     });
-    const balance = accountBalance + parseFloat(amount);
-    console.log(balance);
+    const balance = accountBalance + parseFloat(Amount);
+    // console.log(balance);
     const newBalance = await db.Account.update(
       { accountBalance: balance },
       { returning: true, where: { userId } }
     );
     await db.Transaction.create({
       userId,
-      amount,
+      amount:Amount,
       accountNumber,
       transactionType
     });
@@ -160,7 +160,7 @@ export const transfer = async (req, res, next) => {
       transactionType
     });
 
-    console.log(payerAccount);
+    // console.log(payerAccount);
     // updating payer's account by debiting the account
     const decreaseBalance = payerAccount.accountBalance - parseFloat(amount);
     const payerBalance = await db.Account.update(
@@ -175,7 +175,7 @@ export const transfer = async (req, res, next) => {
       transactionType
     });
     return res
-      .status(httpStatus.CREATED)
+      .status(httpStatus.OK)
       .json(sendResponse(httpStatus.OK, "success", payerBalance, null));
   } catch (error) {
     next(error);

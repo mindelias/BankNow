@@ -6,7 +6,7 @@ import { comparePassword } from "../services/bcrypt.service";
 const signInMiddleware = async (req, res, next) => {
   const { email, password } = req.body;
   const errors = {};
-
+try {
   const emailExists = await db.User.findOne({ where: { email: email } });
 
   if (!emailExists) {
@@ -17,6 +17,8 @@ const signInMiddleware = async (req, res, next) => {
   if (!isMatch) {
     errors["password"] = "incorrect Password";
   }
+  
+} catch (error) {
 
   if (Object.keys(errors).length) {
     return res
@@ -30,8 +32,12 @@ const signInMiddleware = async (req, res, next) => {
         )
       );
   }
+  
+  next(error);
+}
+  
 
-  next();
+
 };
 
 export default signInMiddleware;

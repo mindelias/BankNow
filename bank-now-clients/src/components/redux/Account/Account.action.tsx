@@ -60,9 +60,9 @@ export const CreateAcc = (data: formData) => async (dispatch: any) => {
   } catch (error) {
     dispatch({
       type: CREATE_FAIL,
-      payload: error.response
+      payload: error.response.data.errors
     });
-    // console.log(error.response.data.errors);
+    //  console.log(error.response.data.errors);
   }
 };
 
@@ -82,7 +82,7 @@ export const AddMoney = (data: depositType) => async (dispatch: any) => {
   } catch (error) {
     dispatch({
       type: ADD_FAIL,
-      payload: error.response
+      payload: error.response.data.errors
     });
     // console.log(error.response.data.errors);
   }
@@ -104,9 +104,9 @@ export const transferMoney = (data: AmountType) => async (dispatch: any) => {
   } catch (error) {
     dispatch({
       type: TRANSFER_FAIL,
-      payload: error.response
+      payload: error.response.data.errors
     });
-    //  console.log(error.response);
+     console.log(error.response.data.errors);
   }
 };
 
@@ -126,7 +126,7 @@ export const getTransation = () => async (dispatch: any) => {
       type: TRANSACTION_FAIL,
       payload: error.response
     });
-    console.log(error.response);
+    // console.log(error.response.data.errors);
   }
 };
 

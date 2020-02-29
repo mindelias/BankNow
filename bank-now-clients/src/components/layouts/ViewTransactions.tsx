@@ -18,7 +18,7 @@ const ViewTransactions: React.FC<props> = ({ transactions }) => {
           </tr>
         </thead>
         <tbody>
-          {transactions.length > 0 &&
+          {transactions.length > 0  &&
             transactions.map((item: any, index: number) => (
               <tr key={item.id}>
                 <th scope="row">{index}</th>

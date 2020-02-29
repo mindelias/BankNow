@@ -22,12 +22,10 @@ const SignIn: React.FC<props> = ({ reg, Auth, Alert, error }) => {
     if (Auth == true) {
       history.push("/createacc");
     }
-    if (error && error['password']) {
-      Alert(error["password"], "danger");
+    if (error) {
+      Alert(error, "danger");
     }
-     if(error && error['issue']){
-      Alert(error["issue"], "danger");
-    }
+    
   }, [reg, Auth, error]);
 
   const [user, setUser] = useState({

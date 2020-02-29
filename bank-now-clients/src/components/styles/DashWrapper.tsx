@@ -97,8 +97,15 @@ const Wrapper = styled.div`
       ),
       url(${circle});
   }
-  .text-info, .btn-info{
-      background-color:#0660BA;
+  .text-info,
+  .btn-info {
+    background-color: #0660ba;
+  }
+  .pointer {
+    cursor: pointer;
+  }
+  li:hover {
+    color: wheat;
   }
 `;
 

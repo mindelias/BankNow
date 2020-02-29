@@ -6,10 +6,10 @@ import uuid from "uuid";
 
 import { SET_ALERT, REMOVE_ALERT } from "../types";
 
-const initialState: [] = [];
+// const initialState: [] = [];
 
 // Set Alert
-export const Alert = (msg: string, type: string, timeout = 7000) => async (
+export const Alert = (msg: string, type: string, timeout = 5000) => async (
   dispatch: any
 ) => {
 

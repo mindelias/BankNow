@@ -4,23 +4,31 @@ import profile from "../assets/avatar.png";
 import MainNav from "../MainNav";
 import { connect } from "react-redux";
 import { loadUser } from "../redux/Auth/Auth.action";
-import { loadAccount, AddMoney , transferMoney, getTransation} from "../redux/Account/Account.action";
+import {
+  loadAccount,
+  AddMoney,
+  transferMoney,
+  getTransation
+} from "../redux/Account/Account.action";
 import ViewTransactions from "../layouts/ViewTransactions";
+import { Alert } from "../redux/alert/AlertAction";
+import AlertView from "../layouts/Alert";
 
 interface props {
   // reg: (args: any) => void;
   userDet: any;
   user: any;
   isAccount: boolean;
-  isUpdated:boolean;
+  isUpdated: boolean;
   load: () => void;
   loadAcc: () => void;
   AddCash: (args: any) => void;
   Transfer: (args: any) => void;
   getTransactions: () => void;
+  Alert: (arg1: string, arg2: string) => void;
+  error: any;
 }
 
- 
 const Dashboard: React.FC<props> = ({
   load,
   userDet,
@@ -30,15 +38,19 @@ const Dashboard: React.FC<props> = ({
   Transfer,
   isUpdated,
   getTransactions,
+  Alert,
+  error
 }) => {
   useEffect(() => {
     load();
     loadAcc();
-    if(isUpdated){
-      window.location.reload()
-
+    if (isUpdated) {
+      window.location.reload();
     }
-  }, [isUpdated]);
+    if (error) {
+      Alert(error, "danger");
+    }
+  }, [isUpdated, error]);
   const [show1, setShow1] = useState(false);
   const [show2, setShow2] = useState(false);
 
@@ -56,29 +68,27 @@ const Dashboard: React.FC<props> = ({
     setShow1(false);
     setShow2(false);
   };
- const DisplayTransactions = () => {
-   getTransactions()
-
- }
+  const DisplayTransactions = () => {
+    getTransactions();
+  };
   const [money, setMoney] = useState({
     amount: "",
-    accountNumber:""
+    accountNumber: ""
   });
 
   const [money1, setMoney1] = useState({
-    Amount: "",
-    
+    Amount: ""
   });
-   
+
   const { amount, accountNumber } = money;
-  const { Amount} = money1;
+  const { Amount } = money1;
 
   const onchangeInput1 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMoney1({ Amount: e.target.value});
+    setMoney1({ Amount: e.target.value });
   };
-   
+
   const onchangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMoney({ ...money , [e.target.name]: e.target.value });
+    setMoney({ ...money, [e.target.name]: e.target.value });
   };
   const AddMoneyAcct = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -130,19 +140,19 @@ const Dashboard: React.FC<props> = ({
               <h2 className="text-center"> Dashboard </h2>
               <hr />
               <ul>
-                <li onClick = {DisplayTransactions}>
+                <li className="pointer" onClick={DisplayTransactions}>
                   <span>
                     <i className="fas fa-history"></i>
                   </span>{" "}
                   Transaction History
                 </li>
-                <li>
+                <li className="pointer">
                   <span>
                     <i className="fas fa-tasks"></i>
                   </span>{" "}
                   Manage Accounts
                 </li>
-                <li>
+                <li className="pointer">
                   <span>
                     <i className="fas fa-cog"></i>
                   </span>{" "}
@@ -189,6 +199,7 @@ const Dashboard: React.FC<props> = ({
 
               <div className="middle">
                 {/* display modal 1 */}
+                <AlertView/>
                 {show1 && (
                   <div className="card col-8">
                     <div className="card-header">
@@ -200,6 +211,7 @@ const Dashboard: React.FC<props> = ({
                       </div>
                     </div>
                     <div className="card-body">
+                     
                       <form className="" onSubmit={AddMoneyAcct}>
                         <div className="form-group">
                           <input
@@ -284,7 +296,7 @@ const Dashboard: React.FC<props> = ({
                     {/* modal body displayed */}
 
                     {/* <button className="btn  btn-danger">Withdrawal</button> */}
-                    <button className="btn btn-danger" onClick = {showModal2}>
+                    <button className="btn btn-danger" onClick={showModal2}>
                       Transfer
                     </button>
                   </div>
@@ -303,7 +315,7 @@ const Dashboard: React.FC<props> = ({
 
                 <button className="col-2 mt-3">View All</button>
               </div>
-              <ViewTransactions/>
+              <ViewTransactions />
             </div>
           </div>
         </div>
@@ -314,9 +326,10 @@ const Dashboard: React.FC<props> = ({
 const mapStateToProps = (state: any) => ({
   userDet: state.Account.user,
   isAccount: state.Account.isAccount,
+  error: state.Account.error,
   user: state.Auth.user,
-  isUpdated:state.Account.isUpdated,
-  transactions:state.Account.transactions
+  isUpdated: state.Account.isUpdated,
+  transactions: state.Account.transactions
 });
 
 export default connect(mapStateToProps, {
@@ -324,7 +337,7 @@ export default connect(mapStateToProps, {
   loadAcc: loadAccount,
   AddCash: AddMoney,
   Transfer: transferMoney,
-  getTransactions:getTransation
-  
+  getTransactions: getTransation,
+  Alert
 })(Dashboard);
 // export default Dashboard;

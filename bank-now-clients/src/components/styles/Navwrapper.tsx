@@ -77,7 +77,7 @@ nav ul {
 nav ul li {
 
     display: inline-block;
-    float: left;
+    /* float: left; */
 }
 
 /* Styling the links */

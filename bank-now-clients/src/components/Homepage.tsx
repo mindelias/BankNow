@@ -25,7 +25,7 @@ function Homepage() {
 
             <div className="test-info text-left mt-lg-5 mt-4">
               <a href="/login" className="btn">
-                <ButtonCont2>Read More</ButtonCont2>
+                <ButtonCont2>Sign in</ButtonCont2>
               </a>
 
               <a href="/register" className="btn">

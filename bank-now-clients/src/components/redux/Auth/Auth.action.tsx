@@ -82,11 +82,12 @@ export const Login = (data: loginData) => async (dispatch: any) => {
     });
     loadUser();
   } catch (error) {
+    console.log(error);
     dispatch({
       type: LOGIN_FAIL,
-      payload: error.response.data.errors
+      payload: error.response.data.error
     });
-    console.log(error.response.data.errors)
+    console.log(error.response.data.error)
      
   }
 };

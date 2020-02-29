@@ -90,7 +90,8 @@ function AccountReducer(state = initialState, action: any) {
       return {
         ...state,
         loading: false,
-        transactions: null
+        transactions: null,
+        error:action.payload
       };
 
     default:

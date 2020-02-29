@@ -5,34 +5,41 @@ import financee from "../assets/finance.svg";
 import { connect } from "react-redux";
 import { Register, Login } from "../redux/Auth/Auth.action";
 import MainNav from "../MainNav";
+import AlertView from "../layouts/Alert";
+import { Alert } from "../redux/alert/AlertAction";
 // import styled from 'styled-components'
 
 interface props {
   reg: (args: any) => void;
   Auth: boolean;
+  Alert: (arg1: string, arg2: string) => void;
+  error: any;
 }
 
-const SignIn: React.FC<props> = ({ reg, Auth }) => {
+const SignIn: React.FC<props> = ({ reg, Auth, Alert, error }) => {
   const history = useHistory();
   useEffect(() => {
-    console.log(Auth);
-    console.log("work sharply");
     if (Auth == true) {
       history.push("/createacc");
     }
-  }, [reg, Auth]);
-  // const []
+    if (error) {
+      Alert(error, "danger");
+    }
+    
+  }, [reg, Auth, error]);
+
   const [user, setUser] = useState({
     email: "",
-
     password: ""
   });
   const { email, password } = user;
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(user);
-    // console.log("this is a jam", Auth);
-    reg(user);
+    if (!email || !password) {
+      Alert("Please enter all fields", "danger");
+    } else {
+      reg(user);
+    }
   };
   const onchangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -47,10 +54,11 @@ const SignIn: React.FC<props> = ({ reg, Auth }) => {
         <div className="row">
           <div className="col-6 bg-right text-center">
             <h3>Welcome to </h3>
-            <img src={financee} alt = 'signin image'/>
+            <img src={financee} alt="signin image" />
           </div>
           <div className="formview col-6">
             <form className="" onSubmit={handleSubmit}>
+              <AlertView />
               <div className="form-group">
                 <input
                   type="email"
@@ -85,7 +93,8 @@ const SignIn: React.FC<props> = ({ reg, Auth }) => {
   );
 };
 const mapStateToProps = (state: any) => ({
-  Auth: state.Auth.isAuthenticated
+  Auth: state.Auth.isAuthenticated,
+  error: state.Auth.error
 });
 
-export default connect(mapStateToProps, { reg: Login })(SignIn);
+export default connect(mapStateToProps, { reg: Login, Alert })(SignIn);

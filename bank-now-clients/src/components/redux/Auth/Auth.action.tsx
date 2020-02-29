@@ -26,7 +26,7 @@ export const loadUser = () => async (dispatch: any) => {
 
   try {
     const res = await axios.get("/api/v1/auth/signin");
-    console.log(res);
+    // console.log(res);
     dispatch({
       type: USER_LOADED,
       payload: res.data
@@ -36,7 +36,7 @@ export const loadUser = () => async (dispatch: any) => {
       type: AUTH_ERROR,
       payload: error.response
     });
-    console.log(error.response);
+     
   }
 };
 
@@ -49,7 +49,7 @@ export const Register = (data: formData) => async (dispatch: any) => {
   };
   try {
     const res = await axios.post("/api/v1/auth/signup", data, config);
-    console.log(res);
+     
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data.payload.token
@@ -59,9 +59,9 @@ export const Register = (data: formData) => async (dispatch: any) => {
   } catch (error) {
     dispatch({
       type: REGISTER_FAIL,
-      payload: error.response
+      payload: error.response.data.errors
     });
-    console.log(error.response);
+     
   }
 };
 
@@ -82,11 +82,13 @@ export const Login = (data: loginData) => async (dispatch: any) => {
     });
     loadUser();
   } catch (error) {
+    console.log(error);
     dispatch({
       type: LOGIN_FAIL,
-      payload: error.response
+      payload: error.response.data.error
     });
-    console.log(error);
+    console.log(error.response.data.error)
+     
   }
 };
 

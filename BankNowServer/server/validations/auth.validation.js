@@ -28,7 +28,6 @@ const userValidation = {
         .max(200)
         .required(),
       password: Joi.string()
-        .min(6)
         .max(255)
         .required()
     }
@@ -65,7 +64,7 @@ const userValidation = {
   },
   deposit: {
     body: {
-      amount: Joi.string().required()
+      Amount: Joi.string().required()
     }
   },
   transfer: {

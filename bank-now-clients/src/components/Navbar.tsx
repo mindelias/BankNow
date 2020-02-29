@@ -30,17 +30,20 @@ function Navbar() {
                       <li>
                         <a href="/about">About Us</a>
                       </li>
-
                       <li>
-                        <a href="/dashboard">Dashboard</a>
+                        <a href="/about">Login </a>
                       </li>
+                      <li>
+                        <a href="/about">Register </a>
+                      </li>
+                       
                     </ul>
                   </nav>
                 </div>
 
                 <div className="justify-content-center">
                   <div className="apply-w3-pvt ml-lg-3">
-                    <a className="btn read" href="register" role="button">
+                    <a className="btn read" href="/register" role="button">
                       Apply Now
                     </a>
                   </div>

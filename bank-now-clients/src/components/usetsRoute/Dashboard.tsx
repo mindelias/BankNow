@@ -1,51 +1,104 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import Wrapper from "../styles/DashWrapper";
 import profile from "../assets/avatar.png";
-import circle from "../assets/circle.jpg";
 import MainNav from "../MainNav";
 import { connect } from "react-redux";
 import { loadUser } from "../redux/Auth/Auth.action";
-import { loadAccount, AddMoney } from "../redux/Account/Account.action";
+import {
+  loadAccount,
+  AddMoney,
+  transferMoney,
+  getTransation
+} from "../redux/Account/Account.action";
+import ViewTransactions from "../layouts/ViewTransactions";
+import { Alert } from "../redux/alert/AlertAction";
+import AlertView from "../layouts/Alert";
 
 interface props {
   // reg: (args: any) => void;
   userDet: any;
   user: any;
   isAccount: boolean;
+  isUpdated: boolean;
   load: () => void;
   loadAcc: () => void;
-  AddCash: (args:any) => void;
+  AddCash: (args: any) => void;
+  Transfer: (args: any) => void;
+  getTransactions: () => void;
+  Alert: (arg1: string, arg2: string) => void;
+  error: any;
 }
 
-// const CreateAccount: React.FC<props> = ({ reg, load, userDet, isAccount }) => {
-const Dashboard: React.FC<props> = ({ load, userDet, user, loadAcc, AddCash }) => {
+const Dashboard: React.FC<props> = ({
+  load,
+  userDet,
+  user,
+  loadAcc,
+  AddCash,
+  Transfer,
+  isUpdated,
+  getTransactions,
+  Alert,
+  error
+}) => {
   useEffect(() => {
     load();
     loadAcc();
-  }, []);
-  const [show, setShow] = useState(false);
+    if (isUpdated) {
+      window.location.reload();
+    }
+    if (error) {
+      Alert(error, "danger");
+    }
+  }, [isUpdated, error]);
+  const [show1, setShow1] = useState(false);
+  const [show2, setShow2] = useState(false);
 
   const showModal = () => {
-    setShow(true);
+    setShow1(true);
+    console.log("displayed");
+  };
+
+  const showModal2 = () => {
+    setShow2(true);
     console.log("displayed");
   };
 
   const hideModal = () => {
-    setShow(false);
+    setShow1(false);
+    setShow2(false);
   };
-   
+  const DisplayTransactions = () => {
+    getTransactions();
+  };
   const [money, setMoney] = useState({
-    amount: ""
+    amount: "",
+    accountNumber: ""
   });
-  const { amount} =  money;
+
+  const [money1, setMoney1] = useState({
+    Amount: ""
+  });
+
+  const { amount, accountNumber } = money;
+  const { Amount } = money1;
+
+  const onchangeInput1 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMoney1({ Amount: e.target.value });
+  };
+
+  const onchangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMoney({ ...money, [e.target.name]: e.target.value });
+  };
   const AddMoneyAcct = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(user);
-
-    AddCash(money);
+    AddCash(money1);
+    // window.location.reload()
   };
-  const onchangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMoney({ amount: e.target.value });
+  const TransferMoney = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    Transfer(money);
+    // window.location.reload()
   };
 
   console.log(userDet);
@@ -87,19 +140,19 @@ const Dashboard: React.FC<props> = ({ load, userDet, user, loadAcc, AddCash }) =
               <h2 className="text-center"> Dashboard </h2>
               <hr />
               <ul>
-                <li>
+                <li className="pointer" onClick={DisplayTransactions}>
                   <span>
                     <i className="fas fa-history"></i>
                   </span>{" "}
                   Transaction History
                 </li>
-                <li>
+                <li className="pointer">
                   <span>
                     <i className="fas fa-tasks"></i>
                   </span>{" "}
                   Manage Accounts
                 </li>
-                <li>
+                <li className="pointer">
                   <span>
                     <i className="fas fa-cog"></i>
                   </span>{" "}
@@ -145,8 +198,10 @@ const Dashboard: React.FC<props> = ({ load, userDet, user, loadAcc, AddCash }) =
               </div>
 
               <div className="middle">
-                {show && (
-                  <div className="card">
+                {/* display modal 1 */}
+                <AlertView/>
+                {show1 && (
+                  <div className="card col-8">
                     <div className="card-header">
                       <div className="row">
                         <div className="col-10">Add Money here</div>
@@ -156,7 +211,42 @@ const Dashboard: React.FC<props> = ({ load, userDet, user, loadAcc, AddCash }) =
                       </div>
                     </div>
                     <div className="card-body">
+                     
                       <form className="" onSubmit={AddMoneyAcct}>
+                        <div className="form-group">
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="id"
+                            placeholder="Enter amount"
+                            // name="Amount"
+                            value={Amount}
+                            onChange={onchangeInput1}
+                          />
+                        </div>
+                        <button
+                          type="submit"
+                          className="btn btn-info btn-block"
+                        >
+                          ADD
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                )}
+                {/* display modal 2 */}
+                {show2 && (
+                  <div className="card">
+                    <div className="card-header">
+                      <div className="row">
+                        <div className="col-10">Transfer Money</div>
+                        <button className="col-2 btn-info" onClick={hideModal}>
+                          <i className="far fa-window-close "></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div className="card-body">
+                      <form className="" onSubmit={TransferMoney}>
                         <div className="form-group">
                           <input
                             type="text"
@@ -165,15 +255,25 @@ const Dashboard: React.FC<props> = ({ load, userDet, user, loadAcc, AddCash }) =
                             placeholder="Enter amount"
                             name="amount"
                             value={amount}
-                             onChange={onchangeInput}
+                            onChange={onchangeInput}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="id"
+                            placeholder="Enter account number"
+                            name="accountNumber"
+                            value={accountNumber}
+                            onChange={onchangeInput}
                           />
                         </div>
                         <button
                           type="submit"
                           className="btn btn-info btn-block"
-                          
                         >
-                          ADD
+                          Transfer
                         </button>
                       </form>
                     </div>
@@ -196,7 +296,9 @@ const Dashboard: React.FC<props> = ({ load, userDet, user, loadAcc, AddCash }) =
                     {/* modal body displayed */}
 
                     {/* <button className="btn  btn-danger">Withdrawal</button> */}
-                    <button className="btn  btn-danger">Transfer</button>
+                    <button className="btn btn-danger" onClick={showModal2}>
+                      Transfer
+                    </button>
                   </div>
                 </div>
                 <div className="row">
@@ -213,6 +315,7 @@ const Dashboard: React.FC<props> = ({ load, userDet, user, loadAcc, AddCash }) =
 
                 <button className="col-2 mt-3">View All</button>
               </div>
+              <ViewTransactions />
             </div>
           </div>
         </div>
@@ -223,110 +326,18 @@ const Dashboard: React.FC<props> = ({ load, userDet, user, loadAcc, AddCash }) =
 const mapStateToProps = (state: any) => ({
   userDet: state.Account.user,
   isAccount: state.Account.isAccount,
-  user: state.Auth.user
+  error: state.Account.error,
+  user: state.Auth.user,
+  isUpdated: state.Account.isUpdated,
+  transactions: state.Account.transactions
 });
 
 export default connect(mapStateToProps, {
   load: loadUser,
   loadAcc: loadAccount,
-  AddCash: AddMoney
+  AddCash: AddMoney,
+  Transfer: transferMoney,
+  getTransactions: getTransation,
+  Alert
 })(Dashboard);
 // export default Dashboard;
-
-const Wrapper = styled.div`
-  background: linear-gradient(106deg, #ebfcff 0%, #f0f8ff 150%);
-  /* background:  #C1B0E8; */
-  background-size: cover;
-  /* height: 100vh; */
-  padding: 4rem;
-  .sideBar {
-    background: linear-gradient(180deg, #0048ba 0%, #e600e6 80%);
-    /* height: 90vh; */
-    padding: 2rem 1rem;
-  }
-  .sideBar h1 {
-    margin: 3rem 4rem;
-  }
-  .sideBar span {
-    margin-right: 5px;
-  }
-  .mainCont {
-    background: white;
-    /* height: 90vh; */
-    padding: 4em 2em;
-    box-shadow: 2px 2px 2px gray;
-  }
-  hr {
-    height: 1.2px;
-    color: white;
-    background-color: white;
-    border: none;
-  }
-  ul {
-    margin-bottom: 1.3em;
-  }
-
-  li {
-    list-style-type: none;
-    font-size: 1.2rem;
-    font-family: "Roboto";
-    margin: 0.7em 0em;
-  }
-  .badge {
-    padding: 0.7em;
-    border-radius: 50%;
-  }
-  img {
-    border-radius: 100%;
-  }
-  .br2 {
-    margin: 2em 0.1em;
-    font-size: 1em;
-  }
-  .middle {
-    background: #ebf2ff;
-    margin: 1em;
-    padding: 1em 1em 3em 1em;
-  }
-  .middle h3 {
-    font-family: "Arvo";
-  }
-
-  .btn-primary {
-    background: linear-gradient(106deg, #0048ba 0%, #6c4fff 100%);
-    border: 1px solid #475677;
-    border-radius: 25px;
-    padding: 8px 38px;
-  }
-  .btn-danger {
-    background: linear-gradient(106deg, #ff3355 0%, #e80027 100%);
-    border: 1px solid #475677;
-    border-radius: 25px;
-    padding: 8px 38px;
-  }
-  .cards {
-    height: 10em;
-    padding: 4em 2em;
-    border-radius: 8px;
-    margin: 2.3em 3em;
-  }
-  .bg-purple {
-    background: linear-gradient(
-        106deg,
-        rgb(255, 0, 100, 0.7),
-        rgb(0, 10, 200, 0.7),
-        rgb(102, 153, 255, 0.7)
-      ),
-      url(${circle});
-  }
-
-  .bg-orange {
-    background: linear-gradient(
-        110deg,
-        rgb(227, 50, 221, 1),
-        rgb(227, 64, 64, 0.8),
-        rgb(175, 0, 42, 1)
-      ),
-      url(${circle});
-  }
-`;

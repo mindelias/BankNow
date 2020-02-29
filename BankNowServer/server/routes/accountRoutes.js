@@ -29,5 +29,5 @@ router.route("/transfer").post(auth,
   accountController.transfer
 );
 
-router.route("/transanctions").get(auth, accountController.getTransaction);
+router.route("/transactions").get(auth, accountController.getTransaction);
 export default router;

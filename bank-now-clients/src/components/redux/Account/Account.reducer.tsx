@@ -5,11 +5,16 @@ import {
   CREATE_SUCCESS,
   CREATE_FAIL,
   ADD_SUCCESS,
-  ADD_FAIL
+  ADD_FAIL,
+  TRANSFER_FAIL,
+  TRANSFER_SUCCESS,
+  VIEW_TRANSACTION,
+  TRANSACTION_FAIL
 } from "../types";
 
 const initialState = {
   user: null,
+  transactions: [],
   isAccount: false,
   loading: false,
   isUpdated: false,
@@ -24,6 +29,14 @@ function AccountReducer(state = initialState, action: any) {
         isAccount: true,
         loading: false,
         user: action.payload.payload
+      };
+
+    case VIEW_TRANSACTION:
+      return {
+        ...state,
+        isAccount: true,
+        loading: false,
+        transactions: action.payload.payload
       };
 
     case CREATE_SUCCESS:
@@ -45,28 +58,41 @@ function AccountReducer(state = initialState, action: any) {
         loading: false,
         error: false
       };
-
+    case TRANSFER_SUCCESS:
+      return {
+        ...state,
+        // ...action.payload,
+        user: action.payload.payload,
+        isAccount: true,
+        isUpdated: true,
+        loading: false,
+        error: false
+      };
     case CREATE_FAIL:
-    case ADD_FAIL:
     case AUTH_ERROR:
       return {
         ...state,
         isAccount: false,
-
         loading: false,
         user: null,
         error: action.payload
       };
-    // case LOGIN_SUCCESS:
-    //   localStorage.setItem("token", action.payload.data[0].token);
-    //   // console.log(action.payload.data[0].token, "verfy token");
-    //   return {
-    //     ...state,
-    //     ...action.payload,
-    //     isAuthenticated: true,
-    //     loading: false,
-    //     error: false
-    //   };
+
+    case ADD_FAIL:
+    case TRANSFER_FAIL:
+      return {
+        ...state,
+        loading: false,
+        isUpdated: false,
+        error: action.payload
+      };
+    case TRANSACTION_FAIL:
+      return {
+        ...state,
+        loading: false,
+        transactions: null,
+        error:action.payload
+      };
 
     default:
       return state;

@@ -38,9 +38,9 @@ export async function getLoggedUsers(req, res, next) {
 }
 
 export const loginUser = async (req, res, next) => {
+  console.log('hi');
   let { email } = req.body;
   let user;
-
   try {
     const userExist = await db.User.findOne({ where: { email: email } });
 

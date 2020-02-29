@@ -31,8 +31,6 @@ const CreateAccount: React.FC<props> = ({ reg, load, userDet, isAccount }) => {
   const { accountType } = user;
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(user);
-
     reg(user);
   };
   const onchangeInput = (e: React.ChangeEvent<HTMLSelectElement>) => {

@@ -6,7 +6,8 @@
     "start-dev": "nodemon --exec babel-node ./bin/www",
     "start": "babel-node ./bin/www",
     "migrate": "sequelize db:migrate",
-    "drop-db": "sequelize db:migrate:undo:all"
+    "drop-db": "sequelize db:migrate:undo:all",
+    "build": "babel server --out-dir build"
   },
   "dependencies": {
     "@babel/cli": "^7.4.4",

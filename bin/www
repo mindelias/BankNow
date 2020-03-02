@@ -4,7 +4,8 @@
  * Module dependencies.
  */
 
-var app = require("../server/app").default;
+var app = require("../build/app").default;
+// var app = require("../server/app").default;
 var debug = require("debug")("banknow:server");
 var http = require("http");
 

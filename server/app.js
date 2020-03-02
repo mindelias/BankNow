@@ -2,6 +2,7 @@ import "@babel/polyfill";
 import createError from "http-errors";
 import express from "express";
 import cookieParser from "cookie-parser";
+import logger from "morgan";
 import config from "./config";
 import * as error from "./config/error";
 import routes from "../server/routes/";

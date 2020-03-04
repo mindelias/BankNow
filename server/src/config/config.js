@@ -11,10 +11,10 @@ module.exports = {
   },
 
   test: {
-    database: '',
-    username: 'postgres',
-    password: '',
-    host: '127.0.0.1',
+    database: 'dsbtsiaa',
+    username: 'dsbtsiaa',
+    password: 'ybAL_MVz3zIjXhLhgC49B0Ioz9Ccghzm',
+    host: 'drona.db.elephantsql.com',
     dialect: 'postgres'
   },
 

@@ -53,5 +53,5 @@
     "@types/styled-components": "^5.0.0",
     "@types/uuid": "^3.4.7"
   },
-  "proxy": "http://localhost:3005"
+  "proxy": "https://bank-now.herokuapp.com/"
 }

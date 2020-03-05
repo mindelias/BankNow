@@ -24,13 +24,13 @@ function Homepage() {
             </p>
 
             <div className="test-info text-left mt-lg-5 mt-4">
+              <a href="/register" className="btn">
+                <ButtonCont2>Get Started</ButtonCont2>
+              </a>
               <a href="/login" className="btn">
-                <ButtonCont2>Sign in</ButtonCont2>
+                <ButtonCont1>Sign in</ButtonCont1>
               </a>
 
-              <a href="/register" className="btn">
-                <ButtonCont1>Get Started</ButtonCont1>
-              </a>
             </div>
             <img src={float} width="300px" height = '100px' className="App-logo img1" />
           </div>
@@ -42,6 +42,8 @@ function Homepage() {
 
 export default Homepage;
 const BgCover = styled.div`
+/* max-width: 100px ; */
+overflow: hidden;
   background: linear-gradient(
       106deg,
       rgb(0, 0, 200, 0.7),
@@ -50,11 +52,12 @@ const BgCover = styled.div`
     ),
     url(${ladycoin});
   background-size: cover;
+  
   /* background-image: */
   background-repeat: no-repeat;
   background-attachment: fixed;
-  /* height: 100vh; */
-  min-height: 50em;
+  height: 96.5vh; 
+  /* min-height: 50em; */
 
   .banner-info {
     padding-top: 10em;

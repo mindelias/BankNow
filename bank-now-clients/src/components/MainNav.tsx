@@ -40,24 +40,21 @@ const MainNav: React.FC<props> = ({ logout, Auth, user }) => {
     <Fragment>
       <li className="nav-item">
         <Link to="/register" className="nav-link text-white">
-          SignUP
+        <span className="fa fa-user-plus"></span> SignUP
         </Link>
       </li>
       <li className="nav-item">
         <Link to="/login" className="nav-link text-white">
-          SignIN
+        <span className="fa fa-sign-in" ></span> SignIN
         </Link>
       </li>
     </Fragment>
   );
-
+  
   return (
     <NavWrapper className="navbar navbar-expand-sm navbar-light px-sm-5">
       <Link to="/">
-        {/* <h3 className="navbar-brand ">
-          {" "}
-          <i className="fas fa-id-card-alt"></i> Contact-App
-        </h3> */}
+         
         <div className="navbar-brand">
           <h1>
             <span className="fa fa-recycle ml-4 spani"></span> BankNow
@@ -104,5 +101,16 @@ const NavWrapper = styled.nav`
     margin: 0rem 5rem;
     color: white !important;
     font-size: 1.1rem;
+  }
+  @media only screen and (max-width: 768px) {
+      .ml-auto{
+        margin-left:0px !important;
+      }
+      .mt-3{
+        margin-top:0px !important;
+      }
+      .nav-item{
+        margin: 0rem 4rem;
+      }
   }
 `;

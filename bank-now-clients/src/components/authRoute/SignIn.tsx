@@ -25,7 +25,6 @@ const SignIn: React.FC<props> = ({ reg, Auth, Alert, error }) => {
     if (error) {
       Alert(error, "danger");
     }
-    
   }, [reg, Auth, error]);
 
   const [user, setUser] = useState({
@@ -53,11 +52,11 @@ const SignIn: React.FC<props> = ({ reg, Auth, Alert, error }) => {
       <LoginWrapper className="container">
         <div className="row">
           <div className="col-6 bg-right text-center">
-            <h3>Welcome to </h3>
             <img src={financee} alt="signin image" />
           </div>
-          <div className="formview col-6">
+          <div className="formview col-md-6 col-xs-12">
             <form className="" onSubmit={handleSubmit}>
+      <h5 className="text-center my-3"> sign in with your details. </h5>
               <AlertView />
               <div className="form-group">
                 <input

@@ -9,6 +9,7 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./components/Navbar";
 import HomePage from "./components/Homepage";
+import PrivateRoute from "./utils/PrivateRoute";
 // import logo from './logo.svg';
 import "./App.css";
 import store from "./components/redux/store";
@@ -16,7 +17,7 @@ import Signup from "./components/authRoute/SignUp";
 import SignIn from "./components/authRoute/SignIn";
 import Dashboard from "./components/usetsRoute/Dashboard";
 import CreateAccount from "./components/usetsRoute/CreateAccount";
-import setAuthToken from './utils/setAuthToken'
+import setAuthToken from "./utils/setAuthToken";
 
 if (localStorage.getItem("Authorization")) {
   setAuthToken(localStorage.getItem("Authorization")!);
@@ -37,13 +38,9 @@ function App() {
             <Route exact path="/login">
               <SignIn />
             </Route>
-            <Route exact path="/dashboard">
-              <Dashboard />
-            </Route>
-            <Route exact path="/createacc">
-              <CreateAccount/>
-            </Route>
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
 
+            <PrivateRoute exact path="/createacc" component={CreateAccount} />
           </Switch>
         </Router>
       </React.Fragment>

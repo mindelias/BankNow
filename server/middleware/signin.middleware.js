@@ -2,7 +2,7 @@ import db from "../src/models";
 import sendResponse from "../helpers/response";
 import httpStatus from "http-status";
 import { comparePassword } from "../services/bcrypt.service";
-import e from "express";
+
 
 const signInMiddleware = async (req, res, next) => {
   const { email, password } = req.body;

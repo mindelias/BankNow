@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LoginWrapper from "../styles/LoginWrapper";
 import { useHistory } from "react-router";
-import financee from "../assets/finance.svg";
+import financee from "../assets/four.svg";
 import { connect } from "react-redux";
 import { Register } from "../redux/Auth/Auth.action";
 import MainNav from "../MainNav";
@@ -40,11 +40,9 @@ const SignUp: React.FC<props> = ({ reg, Auth, Alert, error }) => {
 
     if (!fullName || !email || !password || !phoneNumber || !confirmPassword) {
       Alert("Please enter all fields", "danger");
-    }
-    else if (password !== confirmPassword) {
+    } else if (password !== confirmPassword) {
       Alert("Password do not match", "danger");
-    }
-    else if (password.length < 6) {
+    } else if (password.length < 6) {
       Alert(
         `Password must be atleast 6 charcters, you are currently using ${password.length} character`,
         "danger"
@@ -65,12 +63,12 @@ const SignUp: React.FC<props> = ({ reg, Auth, Alert, error }) => {
       <LoginWrapper className="container">
         <div className="row">
           <div className="col-6 bg-right text-center">
-            <h3>Welcome to </h3>
             <img src={financee} alt="sigup image" />
           </div>
-          <div className="formview col-6">
+          <div className="formview col-md-6 col-xs-12">
             <form className="" onSubmit={handleSubmit}>
-            <AlertView />
+      <h5 className="text-center my-3"> Register to get started </h5>
+              <AlertView />
               <div className="form-group">
                 <input
                   type="text"

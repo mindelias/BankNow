@@ -8,6 +8,7 @@ import { CreateAcc } from "../redux/Account/Account.action";
 import { loadUser } from "../redux/Auth/Auth.action";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { CreateAccWrapper } from "../styles/CreateAcc";
 
 interface props {
   reg: (args: any) => void;
@@ -59,15 +60,11 @@ const CreateAccount: React.FC<props> = ({ reg, load, userDet, isAccount }) => {
           </WhiteBox>
         </div>
       ) : (
-        <LoginWrapper className="container">
-          <div className="row">
-            <div className="col-6 bg-right text-center">
-              <h3>Welcome to </h3>
-              <img src={financee} />
-            </div>
-            <div className="formview col-6">
+        <CreateAccWrapper className="container ">
+           
+            <div className="formview mx-auto col-6">
               <form className="" onSubmit={handleSubmit}>
-                <label htmlFor="sel1">Select list (select one):</label>
+                <label htmlFor="sel1">Select account type (select one):</label>
                 <select
                   className="form-control"
                   defaultValue={accountType}
@@ -78,13 +75,13 @@ const CreateAccount: React.FC<props> = ({ reg, load, userDet, isAccount }) => {
                   <option value="current">Current</option>
                 </select>
 
-                <button type="submit" className="btn btn-info btn-block">
+                <button type="submit" className="btn btn-primary btn-block">
                   Submit
                 </button>
               </form>
             </div>
-          </div>
-        </LoginWrapper>
+           
+        </CreateAccWrapper>
       )}
     </div>
   );

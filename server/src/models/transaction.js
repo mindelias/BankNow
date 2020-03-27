@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
       transactionType: { type: DataTypes.STRING, allowNull: false },
       amount: { type: DataTypes.DOUBLE, allowNull: false },
       accountNumber: { type: DataTypes.STRING, allowNull: false },
-      userId: { type: DataTypes.INTEGER, allowNull: false }
+      userId: { type: DataTypes.INTEGER, allowNull: false },
+      recipient: { type: DataTypes.STRING, allowNull: false }
     },
     {}
   );
@@ -27,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE'
     })
+    
   };
   return Transaction;
 };

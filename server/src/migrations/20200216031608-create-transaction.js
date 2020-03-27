@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Transactions', {
+    return queryInterface.createTable("Transactions", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -19,11 +19,11 @@ module.exports = {
       accountNumber: {
         type: Sequelize.STRING,
         allowNull: false,
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
         references: {
-          model: 'Accounts',
-          key: 'accountNumber'
+          model: "Accounts",
+          key: "accountNumber"
         }
       },
       userId: {
@@ -32,9 +32,15 @@ module.exports = {
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
         references: {
-          model: 'Users',
-          key: 'id'
+          model: "Users",
+          key: "id"
         }
+      },
+      recipient: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
       createdAt: {
         allowNull: false,
@@ -47,6 +53,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Transactions');
+    return queryInterface.dropTable("Transactions");
   }
 };

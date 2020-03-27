@@ -18,6 +18,8 @@ import SignIn from "./components/authRoute/SignIn";
 import Dashboard from "./components/usetsRoute/Dashboard";
 import CreateAccount from "./components/usetsRoute/CreateAccount";
 import setAuthToken from "./utils/setAuthToken";
+import AllDetails from "./components/adminRoute/AllDetails";
+import Navigation from "./components/adminRoute/navigation";
 
 if (localStorage.getItem("Authorization")) {
   setAuthToken(localStorage.getItem("Authorization")!);
@@ -39,6 +41,8 @@ function App() {
               <SignIn />
             </Route>
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            <PrivateRoute exact path="/alldetails" component={AllDetails} />
+            <PrivateRoute exact path="/navigation" component={Navigation} />
 
             <PrivateRoute exact path="/createacc" component={CreateAccount} />
           </Switch>

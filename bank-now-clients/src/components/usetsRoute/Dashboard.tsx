@@ -13,6 +13,8 @@ import {
 import ViewTransactions from "../layouts/ViewTransactions";
 import { Alert } from "../redux/alert/AlertAction";
 import AlertView from "../layouts/Alert";
+import Navigation from "../adminRoute/navigation";
+
 
 interface props {
   // reg: (args: any) => void;
@@ -105,6 +107,7 @@ const Dashboard: React.FC<props> = ({
   return (
     <div>
       <MainNav />
+      {user.userType === 'admin'? (<Navigation/>): (
       <Wrapper>
         <div className="container">
           <div className="row">
@@ -319,7 +322,7 @@ const Dashboard: React.FC<props> = ({
             </div>
           </div>
         </div>
-      </Wrapper>
+      </Wrapper>)}
     </div>
   );
 };

@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import { connect } from "react-redux";
+import { userInfo } from "os";
 
 interface props {
   transactions: any;
+  user:any
 }
 
-const ViewTransactions: React.FC<props> = ({ transactions }) => {
+const ViewTransactions: React.FC<props> = ({ transactions, user }) => {
   return (
     <div className = 'container'>
       <table className="table">
@@ -13,6 +15,7 @@ const ViewTransactions: React.FC<props> = ({ transactions }) => {
           <tr>
             <th scope="col">#</th>
             <th scope="col">Amount</th>
+            <th scope="col">Recipient</th>
             <th scope="col">Transaction Type</th>
             <th scope="col">Date</th>
           </tr>
@@ -23,8 +26,9 @@ const ViewTransactions: React.FC<props> = ({ transactions }) => {
               <tr key={item.id}>
                 <th scope="row">{index}</th>
                 <td>{item.amount}</td>
+                <td>{item.recipient === user.fullName? 'Self': item.recipient}</td>
                 <td>{item.transactionType}</td>
-                <td>{item.createdAt}</td>
+                <td>{new Date(item.createdAt).toDateString()}</td>
               </tr>
             ))}
         </tbody>
@@ -34,7 +38,8 @@ const ViewTransactions: React.FC<props> = ({ transactions }) => {
 };
 
 const mapStateToProps = (state: any) => ({
-  transactions: state.Account.transactions
+  transactions: state.Account.transactions,
+  user: state.Auth.user,
 });
 
 export default connect(mapStateToProps)(ViewTransactions);

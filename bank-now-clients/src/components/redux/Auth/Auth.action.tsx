@@ -6,7 +6,9 @@ import {
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   LOGOUT,
-  USER_LOADED
+  USER_LOADED,
+  ADMIN_LOADED,
+  ADMIN_FAIL
 } from "../types";
 import setAuthToken from "../../../utils/setAuthToken";
 
@@ -91,6 +93,28 @@ export const Login = (data: loginData) => async (dispatch: any) => {
      
   }
 };
+
+export const getAllUsersDetailsForAdmin = () => async (dispatch: any) => {
+  if (localStorage.getItem("Authorization")) {
+    setAuthToken(localStorage.getItem("Authorization")!);
+  }
+
+  try {
+    const res = await axios.get("/api/v1/admin");
+    //  console.log(res);
+    dispatch({
+      type:  ADMIN_LOADED,
+      payload: res.data
+    });
+  } catch (error) {
+    dispatch({
+      type:  ADMIN_FAIL,
+      payload: error.response
+    });
+     
+  }
+};
+
 
 // logout User
 export const LogOut = () => async (dispatch: any) => {

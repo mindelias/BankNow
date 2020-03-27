@@ -6,7 +6,8 @@ import {
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   LOGOUT,
-  USER_LOADED
+  USER_LOADED,
+  ADMIN_LOADED
 } from "../types";
 
 const initialState = {
@@ -21,18 +22,24 @@ const initialState = {
 function AuthReduce(state = initialState, action: any) {
   switch (action.type) {
     case USER_LOADED:
-      console.log(action.payload)
+      console.log(action.payload);
       return {
         ...state,
         isAuthenticated: true,
         loading: false,
         user: action.payload.payload
       };
-
+    case ADMIN_LOADED:
+      console.log(action.payload);
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false,
+        users: action.payload
+      };
     case REGISTER_SUCCESS:
-    
       localStorage.setItem("Authorization", action.payload);
-       console.log(action.payload, "verfy token")
+      console.log(action.payload, "verfy token");
       return {
         ...state,
         ...action.payload,

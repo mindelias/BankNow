@@ -1,7 +1,7 @@
 import React from "react";
 import ladycoin from "./assets/ladycoin.jpeg";
-import capture from "./assets/capture.png";
-import pexels from "./assets/pexels.jpeg";
+// import capture from "./assets/capture.png";
+// import pexels from "./assets/pexels.jpeg";
 import float from "./assets/float.png";
 import styled from "styled-components";
 import { ButtonCont1, ButtonCont2 } from "./assets/Button";
@@ -11,7 +11,7 @@ function Homepage() {
   return (
     <BgCover className="container-fluid text-center">
       <Navbar />
-      <div className="container-fluid">
+      <div className="">
         <div className="banner-info">
           <div className="banner-w3ls-inner">
             <h4>Invest in your Future</h4>
@@ -30,9 +30,8 @@ function Homepage() {
               <a href="/login" className="btn">
                 <ButtonCont1>Sign in</ButtonCont1>
               </a>
-
             </div>
-            <img src={float} width="300px" height = '100px' className="App-logo img1" />
+            
           </div>
         </div>
       </div>
@@ -42,8 +41,7 @@ function Homepage() {
 
 export default Homepage;
 const BgCover = styled.div`
-/* max-width: 100px ; */
-overflow: hidden;
+  padding: 2.5rem 3rem;
   background: linear-gradient(
       106deg,
       rgb(0, 0, 200, 0.7),
@@ -51,17 +49,15 @@ overflow: hidden;
       rgb(44, 20, 250, 0.7)
     ),
     url(${ladycoin});
-  background-size: cover;
-  
-  /* background-image: */
+  background-size: 100%;
+
   background-repeat: no-repeat;
   background-attachment: fixed;
-  height: 96.5vh; 
-  /* min-height: 50em; */
+  /* height: 100vh; */
 
   .banner-info {
-    padding-top: 10em;
-    margin-left: 3.5em;
+    padding-top: 8em;
+    padding-left: 1.5em;
   }
   .img1 {
     position: absolute;
@@ -89,7 +85,7 @@ overflow: hidden;
   }
 
   .banner-info h4 {
-    color: #ec1c24;
+    color: #ffbf00;
     letter-spacing: 7px;
     text-transform: uppercase;
     font-weight: 700;

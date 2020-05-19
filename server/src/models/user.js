@@ -1,7 +1,7 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
-    'User',
+    "User",
     {
       email: {
         type: DataTypes.STRING,
@@ -28,10 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   User.prototype.toJSON = function() {
-    const { password, createdAt, updatedAt, ...rest } = Object.assign(
-      {},
-      this.get()
-    );
+    const { password, ...rest } = Object.assign({}, this.get());
     return rest;
   };
   User.associate = function(models) {
@@ -43,6 +40,11 @@ module.exports = (sequelize, DataTypes) => {
     });
     User.hasMany(models.Transaction, {
       foreignKey: "userId",
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE"
+    });
+    User.hasMany(models.Transaction, {
+      foreignKey: "recipient",
       onDelete: "CASCADE",
       onUpdate: "CASCADE"
     });

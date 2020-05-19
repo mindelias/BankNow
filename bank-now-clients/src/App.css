@@ -11,14 +11,15 @@
   --mainYellow:#ffa400;
   
 }
+/* html{
+  font-size: 10px;
+} */
 body{
   box-sizing: border-box;
   margin: 0px;
-  padding: 0px;
-  /* font-family: 'Arvo'; */
+  padding: 0px; 
   font-family: 'Roboto'; 
-  /* font-family: 'Oswald'; */
-
+   
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -26,7 +27,11 @@ body{
     animation: App-logo-spin infinite 50s reverse;
   }
 }
-
+@media screen and (max-width: 768px) {
+    body {
+      overflow-x: hidden;
+    }
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

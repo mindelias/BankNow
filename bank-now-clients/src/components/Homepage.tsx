@@ -53,15 +53,14 @@ const BgCover = styled.div`
 
   background-repeat: no-repeat;
   background-attachment: fixed;
-  /* height: 100vh; */
+  height: 100vh;
 
   .banner-info {
-    padding-top: 8em;
-    padding-left: 1.5em;
+    padding-top: 6em;
+    padding-left: 1.2em;
   }
   .img1 {
     position: absolute;
-
     right: 3%;
   }
   .img2 {
@@ -99,5 +98,11 @@ const BgCover = styled.div`
   .banner-top2,
   .banner-top3 {
     min-height: 50em;
+  }
+  @media (max-width: 486px) {
+     
+    .banner-info{
+      margin-top: 7rem
+    }
   }
 `;

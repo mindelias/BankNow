@@ -4,6 +4,10 @@
  * Module dependencies.
  */
 
+
+//  your connection string example
+// const conString = "postgres://YourUserName:YourPassword@YourHost:5432/YourDatabase";
+
 var app = require("../server/app").default;
 // var app = require("../server/app").default;
 var debug = require("debug")("banknow:server");

@@ -19,5 +19,6 @@ export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';
 export const VIEW_TRANSACTION = 'VIEW_TRANSACTION';
 export const TRANSACTION_FAIL = 'TRANSACTION_FAIL';
+export const SET_LOADING = "SET_LOADING";
 
 

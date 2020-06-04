@@ -7,7 +7,8 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   USER_LOADED,
-  ADMIN_LOADED
+  ADMIN_LOADED,
+  SET_LOADING
 } from "../types";
 
 const initialState = {
@@ -21,13 +22,18 @@ const initialState = {
 
 function AuthReduce(state = initialState, action: any) {
   switch (action.type) {
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: action.isLoading,
+      };
     case USER_LOADED:
       console.log(action.payload);
       return {
         ...state,
         isAuthenticated: true,
         loading: false,
-        user: action.payload.payload
+        user: action.payload.payload,
       };
     case ADMIN_LOADED:
       console.log(action.payload);
@@ -35,7 +41,7 @@ function AuthReduce(state = initialState, action: any) {
         ...state,
         isAuthenticated: true,
         loading: false,
-        users: action.payload
+        users: action.payload,
       };
     case REGISTER_SUCCESS:
       localStorage.setItem("Authorization", action.payload);
@@ -45,7 +51,7 @@ function AuthReduce(state = initialState, action: any) {
         ...action.payload,
         isAuthenticated: true,
         loading: false,
-        error: false
+        error: false,
       };
     case REGISTER_FAIL:
     case LOGIN_FAIL:
@@ -58,7 +64,7 @@ function AuthReduce(state = initialState, action: any) {
         isAuthenticated: false,
         loading: false,
         user: null,
-        error: action.payload
+        error: action.payload,
       };
     case LOGIN_SUCCESS:
       localStorage.setItem("Authorization", action.payload);
@@ -68,7 +74,7 @@ function AuthReduce(state = initialState, action: any) {
         ...action.payload,
         isAuthenticated: true,
         loading: false,
-        error: false
+        error: false,
       };
 
     default:

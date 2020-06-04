@@ -4,11 +4,10 @@ import finance from "../assets/finance.svg";
 const LoginWrapper = styled.div`
   /* max-height:36em; */
   padding: 4em 4em 2em 4em;
+  width: 100%;
   .bg-right {
     background: linear-gradient(360deg, #2655ee 0%, #34b3ff 50%);
     text-align: center;
-    /* margin: 4rem 0rem 3rem 6em; */
-    /* border-radius: 15px; */
     height: 35em;
   }
 
@@ -19,6 +18,7 @@ const LoginWrapper = styled.div`
   }
   .formview {
     max-height: 35em;
+    width: 100%;
     background: var(--mainWhite);
   }
   form {
@@ -28,27 +28,35 @@ const LoginWrapper = styled.div`
   .btn-info {
     background: linear-gradient(106deg, #2655ee 0%, #34b3ff 100%);
   }
+  .loader {
+    position: absolute;
+    left: 45%;
+    top: 20%;
+  }
 
   @media only screen and (max-width: 768px) {
     padding: 0em;
-    margin:0em;
+    margin: 9em 0em;
     display: flex;
-      justify-content: center;
+    justify-content: center;
+    align-items: center;
     .bg-right {
       display: none;
     }
     .formview {
       background: linear-gradient(360deg, #2655ee 0%, #34b3ff 50%);
       border-radius: 10px;
-      
-      margin: 3em 3em;
-      max-height: 33em;
+      width: 300px !important;
+      margin: 10em 3em;
+      padding: 5em 3em;
+      height: 38em;
     }
-    form{
-      margin:4em 2em
+    form {
+      /* margin: 4em 2em; */
+      width: 80%;
     }
-    .row{
-      margin-right:0px!important;
+    .row {
+      margin-right: 0px !important;
     }
   }
 `;

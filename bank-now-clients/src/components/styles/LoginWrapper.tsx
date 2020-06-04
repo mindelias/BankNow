@@ -3,8 +3,8 @@ import finance from "../assets/finance.svg";
 
 const LoginWrapper = styled.div`
   /* max-height:36em; */
-  padding: 4em 4em 2em 4em;
-  width: 100%;
+  padding: 4em 10em;
+   
   .bg-right {
     background: linear-gradient(360deg, #2655ee 0%, #34b3ff 50%);
     text-align: center;
@@ -35,8 +35,8 @@ const LoginWrapper = styled.div`
   }
 
   @media only screen and (max-width: 768px) {
-    padding: 0em;
-    margin: 9em 0em;
+    /* padding: 0em; */
+    /* margin: 9em 0em; */
     display: flex;
     justify-content: center;
     align-items: center;

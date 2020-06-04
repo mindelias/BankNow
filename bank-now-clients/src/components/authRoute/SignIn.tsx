@@ -65,7 +65,7 @@ const SignIn: React.FC<props> = ({ reg, Auth, Alert, error, loading }) => {
             <div className="col-6 bg-right text-center">
               <img src={financee} alt="signin image" />
             </div>
-            <div className="formview col-md-6 col-sm-12">
+            <div className="formview col-md-6 col-xs-12">
               <form className="" onSubmit={handleSubmit}>
                 <h5 className="text-center my-3">
                   {" "}

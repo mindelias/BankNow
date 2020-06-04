@@ -17,12 +17,20 @@ module.exports = {
     host: 'drona.db.elephantsql.com',
     dialect: 'postgres'
   },
-
-  production: {
-    database: process.env.DB_NAME,
-    username: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    host: process.env.DB_HOST,
+ production: {
+    database: 'iamtoxuy',
+    username: 'iamtoxuy',
+    password: '4MORM7PLbFUZDx--ScyXfPttZ3GDcl_D',
+    host: 'ruby.db.elephantsql.com',
     dialect: 'postgres'
   }
+  // production: {
+  //   database: process.env.DB_NAME,
+  //   username: process.env.DB_USER,
+  //   password: process.env.DB_PASS,
+  //   host: process.env.DB_HOST,
+  //   dialect: 'postgres'
+  // }
 };
+
+ 

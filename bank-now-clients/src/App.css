@@ -2,24 +2,46 @@
   text-align: center;
 }
 
- 
 :root {
-  --mainBlue:#2a2a72;
-  --lightBlue:#009ffd;
-  --mainWhite:#f3f3f3;
-  --mainDark:#232528;
-  --mainYellow:#ffa400;
-  
+  --mainBlue: #2a2a72;
+  --lightBlue: #009ffd;
+  --mainWhite: #f3f3f3;
+  --mainDark: #232528;
+  --mainYellow: #ffa400;
 }
-/* html{
-  font-size: 10px;
-} */
-body{
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0px;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 100%;
+}
+@media screen and (max-width: 1200px) {
+  html {
+    font-size: 80%;
+  }
+}
+
+@media (max-width: 900px) {
+  html {
+    font-size: 60%;
+  }
+}
+@media (max-width: 486px) {
+  html {
+    font-size: 48%;
+  }
+}
+body {
   box-sizing: border-box;
   margin: 0px;
-  padding: 0px; 
-  font-family: 'Roboto'; 
-   
+  padding: 0px;
+  font-family: "Roboto";
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -28,9 +50,9 @@ body{
   }
 }
 @media screen and (max-width: 768px) {
-    body {
-      overflow-x: hidden;
-    }
+  body {
+    overflow-x: hidden;
+  }
 }
 .App-header {
   background-color: #282c34;

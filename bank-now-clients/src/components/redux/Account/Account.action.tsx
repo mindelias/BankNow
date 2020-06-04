@@ -9,9 +9,10 @@ import {
   TRANSFER_SUCCESS,
   TRANSFER_FAIL,
   VIEW_TRANSACTION,
-  TRANSACTION_FAIL
+  TRANSACTION_FAIL,
 } from "../types";
 import setAuthToken from "../../../utils/setAuthToken";
+import { BASE_URL } from "../../../utils/";
 
 interface formData {
   AccounType: string;
@@ -28,15 +29,15 @@ export const loadAccount = () => async (dispatch: any) => {
   }
 
   try {
-    const res = await axios.get("/api/v1/account");
+    const res = await axios.get(BASE_URL + "/api/v1/account");
     dispatch({
       type: ACCOUNT_LOADED,
-      payload: res.data
+      payload: res.data,
     });
   } catch (error) {
     dispatch({
       type: AUTH_ERROR,
-      payload: error.response
+      payload: error.response,
     });
     console.log(error.response);
   }
@@ -45,22 +46,22 @@ export const loadAccount = () => async (dispatch: any) => {
 export const CreateAcc = (data: formData) => async (dispatch: any) => {
   const config = {
     headers: {
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    },
   };
   try {
-    const res = await axios.post("/api/v1/account", data, config);
+    const res = await axios.post(BASE_URL + "/api/v1/account", data, config);
     // console.log(res);
     dispatch({
       type: CREATE_SUCCESS,
-      payload: res.data
+      payload: res.data,
     });
 
     //  loadUsers();
   } catch (error) {
     dispatch({
       type: CREATE_FAIL,
-      payload: error.response.data.errors
+      payload: error.response.data.errors,
     });
     //  console.log(error.response.data.errors);
   }
@@ -69,20 +70,24 @@ export const CreateAcc = (data: formData) => async (dispatch: any) => {
 export const AddMoney = (data: depositType) => async (dispatch: any) => {
   const config = {
     headers: {
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    },
   };
   try {
-    const res = await axios.post("/api/v1/account/deposit", data, config);
+    const res = await axios.post(
+      BASE_URL + "/api/v1/account/deposit",
+      data,
+      config
+    );
     // console.log(res);
     dispatch({
       type: ADD_SUCCESS,
-      payload: res.data
+      payload: res.data,
     });
   } catch (error) {
     dispatch({
       type: ADD_FAIL,
-      payload: error.response.data.errors
+      payload: error.response.data.errors,
     });
     // console.log(error.response.data.errors);
   }
@@ -91,22 +96,22 @@ export const AddMoney = (data: depositType) => async (dispatch: any) => {
 export const transferMoney = (data: AmountType) => async (dispatch: any) => {
   const config = {
     headers: {
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    },
   };
   try {
     const res = await axios.post("/api/v1/account/transfer", data, config);
     // console.log(res);
     dispatch({
       type: TRANSFER_SUCCESS,
-      payload: res.data
+      payload: res.data,
     });
   } catch (error) {
     dispatch({
       type: TRANSFER_FAIL,
-      payload: error.response.data.errors
+      payload: error.response.data.errors,
     });
-     console.log(error.response.data.errors);
+    console.log(error.response.data.errors);
   }
 };
 
@@ -116,15 +121,15 @@ export const getTransation = () => async (dispatch: any) => {
   }
 
   try {
-    const res = await axios.get("/api/v1/account/transactions");
+    const res = await axios.get(BASE_URL + "/api/v1/account/transactions");
     dispatch({
       type: VIEW_TRANSACTION,
-      payload: res.data
+      payload: res.data,
     });
   } catch (error) {
     dispatch({
       type: TRANSACTION_FAIL,
-      payload: error.response
+      payload: error.response,
     });
     // console.log(error.response.data.errors);
   }

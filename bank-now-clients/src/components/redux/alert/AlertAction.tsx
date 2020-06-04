@@ -1,8 +1,5 @@
 import React, { useReducer } from "react";
 import uuid from "uuid";
-// import AlertContext from "./AlertContext";
-// import AlertReducer from "./AlertReducer";
-// import { Items } from "../Components/Contacts/ContactItem";
 
 import { SET_ALERT, REMOVE_ALERT } from "../types";
 

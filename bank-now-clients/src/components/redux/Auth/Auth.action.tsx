@@ -11,6 +11,7 @@ import {
   ADMIN_FAIL
 } from "../types";
 import setAuthToken from "../../../utils/setAuthToken";
+import { BASE_URL } from "../../../utils";
 
 interface formData {
   fullName: string;
@@ -27,7 +28,7 @@ export const loadUser = () => async (dispatch: any) => {
   }
 
   try {
-    const res = await axios.get("/api/v1/auth/signin");
+    const res = await axios.get(BASE_URL + "/api/v1/auth/signin");
     // console.log(res);
     dispatch({
       type: USER_LOADED,
@@ -51,7 +52,7 @@ export const Register = (data: formData) => async (dispatch: any) => {
   };
   try {
     const res = await axios.post(
-      "https://banknow.herokuapp.com/api/v1/auth/signup",
+      BASE_URL + "https://banknow.herokuapp.com/api/v1/auth/signup",
       data,
       config
     );
@@ -79,7 +80,11 @@ export const Login = (data: loginData) => async (dispatch: any) => {
     }
   };
   try {
-    const res = await axios.post("/api/v1/auth/signin", data, config);
+    const res = await axios.post(
+      BASE_URL + "/api/v1/auth/signin",
+      data,
+      config
+    );
     // console.log(res.data.data[0]);
     localStorage.setItem("Authorization", res.data.payload.token);
     dispatch({
@@ -104,7 +109,7 @@ export const getAllUsersDetailsForAdmin = () => async (dispatch: any) => {
   }
 
   try {
-    const res = await axios.get("/api/v1/admin");
+    const res = await axios.get(BASE_URL + "/api/v1/admin");
     //  console.log(res);
     dispatch({
       type:  ADMIN_LOADED,

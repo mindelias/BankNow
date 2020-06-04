@@ -50,7 +50,11 @@ export const Register = (data: formData) => async (dispatch: any) => {
     }
   };
   try {
-    const res = await axios.post("/api/v1/auth/signup", data, config);
+    const res = await axios.post(
+      "https://banknow.herokuapp.com/api/v1/auth/signup",
+      data,
+      config
+    );
      
     dispatch({
       type: REGISTER_SUCCESS,

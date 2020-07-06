@@ -20,6 +20,7 @@ import CreateAccount from "./components/usetsRoute/CreateAccount";
 import setAuthToken from "./utils/setAuthToken";
 import AllDetails from "./components/adminRoute/AllDetails";
 import Navigation from "./components/adminRoute/navigation";
+import About from "./components/About";
 
 if (localStorage.getItem("Authorization")) {
   setAuthToken(localStorage.getItem("Authorization")!);
@@ -39,6 +40,9 @@ function App() {
             </Route>
             <Route exact path="/login">
               <SignIn />
+            </Route>
+            <Route exact path="/about">
+              <About/>
             </Route>
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <PrivateRoute exact path="/alldetails" component={AllDetails} />

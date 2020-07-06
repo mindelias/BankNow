@@ -26,7 +26,7 @@ function NavBar() {
         <nav className={isOpen ? "topnav responsive" : "topnav"}>
           <ul className="nav-linkz">
             <li className={active ? "li-animate" : ""}>
-              <a href="index.html" className="nav-linc">
+              <a href="/" className="nav-linc">
                 Home
               </a>
             </li>
@@ -36,12 +36,12 @@ function NavBar() {
               </a>
             </li>
             <li className={active ? "li-animate" : ""}>
-              <a href="/about" className="nav-linc">
+              <a href="/login" className="nav-linc">
                 Login{" "}
               </a>
             </li>
             <li className={active ? "li-animate" : ""}>
-              <a href="/about" className="nav-linc">
+              <a href="/register" className="nav-linc">
                 Register{" "}
               </a>
             </li>

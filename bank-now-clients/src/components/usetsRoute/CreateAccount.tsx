@@ -61,26 +61,27 @@ const CreateAccount: React.FC<props> = ({ reg, load, userDet, isAccount }) => {
         </div>
       ) : (
         <CreateAccWrapper className="container ">
-           
-            <div className="formview mx-auto col-6">
-              <form className="" onSubmit={handleSubmit}>
-                <label htmlFor="sel1">Select account type (select one):</label>
-                <select
-                  className="form-control"
-                  defaultValue={accountType}
-                  value={accountType}
-                  onChange={onchangeInput}
-                >
-                  <option value="savings">Savings</option>
-                  <option value="current">Current</option>
-                </select>
+          <h5>
+            Select account type <span>(savings or current)</span>
+          </h5>
+          <div className="formview mx-auto col-6">
+            <form className="" onSubmit={handleSubmit}>
+              {/* <label htmlFor="sel1">Select account type (select one):</label> */}
+              <select
+                className="form-control"
+                defaultValue={accountType}
+                value={accountType}
+                onChange={onchangeInput}
+              >
+                <option value="savings">Savings</option>
+                <option value="current">Current</option>
+              </select>
 
-                <button type="submit" className="btn btn-primary btn-block">
-                  Submit
-                </button>
-              </form>
-            </div>
-           
+              <button type="submit" className="btn btn-primary btn-block">
+                Submit
+              </button>
+            </form>
+          </div>
         </CreateAccWrapper>
       )}
     </div>

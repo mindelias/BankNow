@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { Alert } from "../redux/alert/AlertAction";
+ 
 
 interface props {
   alerts: any;

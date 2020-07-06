@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import MainNav from "../MainNav";
-import LoginWrapper from "../styles/LoginWrapper";
-import { useHistory } from "react-router";
-import financee from "../assets/finance.svg";
 import { connect } from "react-redux";
 import { CreateAcc } from "../redux/Account/Account.action";
 import { loadUser } from "../redux/Auth/Auth.action";
@@ -25,9 +22,10 @@ const CreateAccount: React.FC<props> = ({ reg, load, userDet, isAccount }) => {
     if (userDet) {
       Setacctnum(userDet.accountNumber);
     }
+    // eslint-disable-next-line
   }, [isAccount]);
   const [user, setUser] = useState({
-    accountType: "savings"
+    accountType: "savings",
   });
   const { accountType } = user;
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -89,7 +87,7 @@ const CreateAccount: React.FC<props> = ({ reg, load, userDet, isAccount }) => {
 };
 const mapStateToProps = (state: any) => ({
   userDet: state.Account.user,
-  isAccount: state.Account.isAccount
+  isAccount: state.Account.isAccount,
 });
 
 export default connect(mapStateToProps, { reg: CreateAcc, load: loadUser })(

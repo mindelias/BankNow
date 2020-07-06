@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import {
   AUTH_ERROR,
   ACCOUNT_LOADED,

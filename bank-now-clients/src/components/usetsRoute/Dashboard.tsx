@@ -8,13 +8,12 @@ import {
   loadAccount,
   AddMoney,
   transferMoney,
-  getTransation
+  getTransation,
 } from "../redux/Account/Account.action";
 import ViewTransactions from "../layouts/ViewTransactions";
 import { Alert } from "../redux/alert/AlertAction";
 import AlertView from "../layouts/Alert";
 import Navigation from "../adminRoute/navigation";
-
 
 interface props {
   // reg: (args: any) => void;
@@ -41,7 +40,7 @@ const Dashboard: React.FC<props> = ({
   isUpdated,
   getTransactions,
   Alert,
-  error
+  error,
 }) => {
   useEffect(() => {
     load();
@@ -52,6 +51,7 @@ const Dashboard: React.FC<props> = ({
     if (error) {
       Alert(error, "danger");
     }
+    // eslint-disable-next-line
   }, [isUpdated, error]);
   const [show1, setShow1] = useState(false);
   const [show2, setShow2] = useState(false);
@@ -75,11 +75,11 @@ const Dashboard: React.FC<props> = ({
   };
   const [money, setMoney] = useState({
     amount: "",
-    accountNumber: ""
+    accountNumber: "",
   });
 
   const [money1, setMoney1] = useState({
-    Amount: ""
+    Amount: "",
   });
 
   const { amount, accountNumber } = money;
@@ -107,222 +107,232 @@ const Dashboard: React.FC<props> = ({
   return (
     <div>
       <MainNav />
-      {user.userType === 'admin'? (<Navigation/>): (
-      <Wrapper>
-        <div className="container">
-          <div className="row">
-            <div className="col-3 sideBar text-white">
-              <h2 className="text-center"> profile and Settings </h2>
-              <hr />
-              <ul>
-                <li>
-                  <span>
-                    <i className="fas fa-sort-numeric-down"></i>
-                  </span>{" "}
-                  Account Number
-                  <h5 className="ml-4 text-warning">
+      {user.userType === "admin" ? (
+        <Navigation />
+      ) : (
+        <Wrapper>
+          <div className="container">
+            <div className="row">
+              <div className="col-3 sideBar text-white">
+                <h2 className="text-center"> profile and Settings </h2>
+                <hr />
+                <ul>
+                  <li>
+                    <span>
+                      <i className="fas fa-sort-numeric-down"></i>
+                    </span>{" "}
+                    Account Number
+                    <h5 className="ml-4 text-warning">
+                      {" "}
+                      # {userDet && userDet.accountNumber}
+                    </h5>
+                  </li>
+                  <li>
+                    <span>
+                      <i className="fas fa-lock"></i>
+                    </span>{" "}
+                    Authentication
+                  </li>
+                  <li>
                     {" "}
-                    # {userDet && userDet.accountNumber}
-                  </h5>
-                </li>
-                <li>
-                  <span>
-                    <i className="fas fa-lock"></i>
-                  </span>{" "}
-                  Authentication
-                </li>
-                <li>
-                  {" "}
-                  <span>
-                    <i className="fas fa-bell"></i>
-                  </span>
-                  Notifications{" "}
-                  <span className="badge badge-lg badge-danger">5</span>
-                </li>
-              </ul>
-              <h2 className="text-center"> Dashboard </h2>
-              <hr />
-              <ul>
-                <li className="pointer" onClick={DisplayTransactions}>
-                  <span>
-                    <i className="fas fa-history"></i>
-                  </span>{" "}
-                  Transaction History
-                </li>
-                <li className="pointer">
-                  <span>
-                    <i className="fas fa-tasks"></i>
-                  </span>{" "}
-                  Manage Accounts
-                </li>
-                <li className="pointer">
-                  <span>
-                    <i className="fas fa-cog"></i>
-                  </span>{" "}
-                  Settings
-                </li>
-              </ul>
+                    <span>
+                      <i className="fas fa-bell"></i>
+                    </span>
+                    Notifications{" "}
+                    <span className="badge badge-lg badge-danger">5</span>
+                  </li>
+                </ul>
+                <h2 className="text-center"> Dashboard </h2>
+                <hr />
+                <ul>
+                  <li className="pointer" onClick={DisplayTransactions}>
+                    <span>
+                      <i className="fas fa-history"></i>
+                    </span>{" "}
+                    Transaction History
+                  </li>
+                  <li className="pointer">
+                    <span>
+                      <i className="fas fa-tasks"></i>
+                    </span>{" "}
+                    Manage Accounts
+                  </li>
+                  <li className="pointer">
+                    <span>
+                      <i className="fas fa-cog"></i>
+                    </span>{" "}
+                    Settings
+                  </li>
+                </ul>
 
-              <h2 className="text-center"> Profile </h2>
-              <hr />
-              <ul>
-                <li>
-                  <span>
-                    <i className="far fa-credit-card"></i>
-                  </span>{" "}
-                  Deposit
-                </li>
-                <li>
-                  <span>
-                    <i className="fas fa-donate"></i>
-                  </span>{" "}
-                  Loans
-                </li>
-                <li>
-                  <span>
-                    <i className="fas fa-money-check-alt"></i>
-                  </span>{" "}
-                  Invest
-                </li>
-              </ul>
-            </div>
-            <div className="col-9 mainCont">
-              <div className="row">
-                <img className="col-3" src={profile} width="15em" />
-                <div className="col-9 ">
-                  <div className="row br2">
-                    <div className="col-4">Name: {user && user.fullName} </div>
-                    <div className="col-4">
-                      Accound id: {userDet && userDet.id}{" "}
+                <h2 className="text-center"> Profile </h2>
+                <hr />
+                <ul>
+                  <li>
+                    <span>
+                      <i className="far fa-credit-card"></i>
+                    </span>{" "}
+                    Deposit
+                  </li>
+                  <li>
+                    <span>
+                      <i className="fas fa-donate"></i>
+                    </span>{" "}
+                    Loans
+                  </li>
+                  <li>
+                    <span>
+                      <i className="fas fa-money-check-alt"></i>
+                    </span>{" "}
+                    Invest
+                  </li>
+                </ul>
+              </div>
+              <div className="col-9 mainCont">
+                <div className="row">
+                  <img className="col-3" src={profile}  alt = 'prof' width="15em" />
+                  <div className="col-9 ">
+                    <div className="row br2">
+                      <div className="col-4">
+                        Name: {user && user.fullName}{" "}
+                      </div>
+                      <div className="col-4">
+                        Accound id: {userDet && userDet.id}{" "}
+                      </div>
+                      <div className="col-4">Email: {user && user.email}</div>
                     </div>
-                    <div className="col-4">Email: {user && user.email}</div>
                   </div>
                 </div>
-              </div>
 
-              <div className="middle">
-                {/* display modal 1 */}
-                <AlertView/>
-                {show1 && (
-                  <div className="card col-8">
-                    <div className="card-header">
-                      <div className="row">
-                        <div className="col-10">Add Money here</div>
-                        <button className="col-2 btn-info" onClick={hideModal}>
-                          <i className="far fa-window-close "></i>
-                        </button>
+                <div className="middle">
+                  {/* display modal 1 */}
+                  <AlertView />
+                  {show1 && (
+                    <div className="card col-8">
+                      <div className="card-header">
+                        <div className="row">
+                          <div className="col-10">Add Money here</div>
+                          <button
+                            className="col-2 btn-info"
+                            onClick={hideModal}
+                          >
+                            <i className="far fa-window-close "></i>
+                          </button>
+                        </div>
+                      </div>
+                      <div className="card-body">
+                        <form className="" onSubmit={AddMoneyAcct}>
+                          <div className="form-group">
+                            <input
+                              type="text"
+                              className="form-control"
+                              id="id"
+                              placeholder="Enter amount"
+                              // name="Amount"
+                              value={Amount}
+                              onChange={onchangeInput1}
+                            />
+                          </div>
+                          <button
+                            type="submit"
+                            className="btn btn-info btn-block"
+                          >
+                            ADD
+                          </button>
+                        </form>
                       </div>
                     </div>
-                    <div className="card-body">
-                     
-                      <form className="" onSubmit={AddMoneyAcct}>
-                        <div className="form-group">
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="id"
-                            placeholder="Enter amount"
-                            // name="Amount"
-                            value={Amount}
-                            onChange={onchangeInput1}
-                          />
+                  )}
+                  {/* display modal 2 */}
+                  {show2 && (
+                    <div className="card">
+                      <div className="card-header">
+                        <div className="row">
+                          <div className="col-10">Transfer Money</div>
+                          <button
+                            className="col-2 btn-info"
+                            onClick={hideModal}
+                          >
+                            <i className="far fa-window-close "></i>
+                          </button>
                         </div>
-                        <button
-                          type="submit"
-                          className="btn btn-info btn-block"
-                        >
-                          ADD
-                        </button>
-                      </form>
-                    </div>
-                  </div>
-                )}
-                {/* display modal 2 */}
-                {show2 && (
-                  <div className="card">
-                    <div className="card-header">
-                      <div className="row">
-                        <div className="col-10">Transfer Money</div>
-                        <button className="col-2 btn-info" onClick={hideModal}>
-                          <i className="far fa-window-close "></i>
-                        </button>
+                      </div>
+                      <div className="card-body">
+                        <form className="" onSubmit={TransferMoney}>
+                          <div className="form-group">
+                            <input
+                              type="text"
+                              className="form-control"
+                              id="id"
+                              placeholder="Enter amount"
+                              name="amount"
+                              value={amount}
+                              onChange={onchangeInput}
+                            />
+                          </div>
+                          <div className="form-group">
+                            <input
+                              type="text"
+                              className="form-control"
+                              id="id"
+                              placeholder="Enter account number"
+                              name="accountNumber"
+                              value={accountNumber}
+                              onChange={onchangeInput}
+                            />
+                          </div>
+                          <button
+                            type="submit"
+                            className="btn btn-info btn-block"
+                          >
+                            Transfer
+                          </button>
+                        </form>
                       </div>
                     </div>
-                    <div className="card-body">
-                      <form className="" onSubmit={TransferMoney}>
-                        <div className="form-group">
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="id"
-                            placeholder="Enter amount"
-                            name="amount"
-                            value={amount}
-                            onChange={onchangeInput}
-                          />
-                        </div>
-                        <div className="form-group">
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="id"
-                            placeholder="Enter account number"
-                            name="accountNumber"
-                            value={accountNumber}
-                            onChange={onchangeInput}
-                          />
-                        </div>
-                        <button
-                          type="submit"
-                          className="btn btn-info btn-block"
-                        >
-                          Transfer
-                        </button>
-                      </form>
+                  )}
+
+                  <div className="row">
+                    <div className="col-6">
+                      <h3>Overview</h3>
+                    </div>
+
+                    <div className="col-6">
+                      <button
+                        className="btn btn-primary mr-4"
+                        onClick={showModal}
+                      >
+                        Add Money
+                      </button>
+
+                      {/* modal body displayed */}
+
+                      {/* <button className="btn  btn-danger">Withdrawal</button> */}
+                      <button className="btn btn-danger" onClick={showModal2}>
+                        Transfer
+                      </button>
                     </div>
                   </div>
-                )}
-
-                <div className="row">
-                  <div className="col-6">
-                    <h3>Overview</h3>
-                  </div>
-
-                  <div className="col-6">
-                    <button
-                      className="btn btn-primary mr-4"
-                      onClick={showModal}
-                    >
-                      Add Money
-                    </button>
-
-                    {/* modal body displayed */}
-
-                    {/* <button className="btn  btn-danger">Withdrawal</button> */}
-                    <button className="btn btn-danger" onClick={showModal2}>
-                      Transfer
-                    </button>
+                  <div className="row">
+                    <div className="cards bg-purple col-4 text-white">
+                      <h5> Balance: #{userDet && userDet.accountBalance}</h5>
+                    </div>
+                    <div className="cards bg-orange col-4 text-white">
+                      <h5> Rate of Interest : 2%</h5>
+                    </div>
                   </div>
                 </div>
                 <div className="row">
-                  <div className="cards bg-purple col-4 text-white">
-                    <h5> Balance: #{userDet && userDet.accountBalance}</h5>
-                  </div>
-                  <div className="cards bg-orange col-4 text-white">
-                    <h5> Rate of Interest : 2%</h5>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-10 my-3">Recent Transations</div>
+                  <div className="col-10 my-3">Recent Transations</div>
 
-                <button className="col-2 mt-3">View All</button>
+                  <button className="col-2 mt-3">View All</button>
+                </div>
+                <ViewTransactions />
               </div>
-              <ViewTransactions />
             </div>
           </div>
-        </div>
-      </Wrapper>)}
+        </Wrapper>
+      )}
     </div>
   );
 };
@@ -332,7 +342,7 @@ const mapStateToProps = (state: any) => ({
   error: state.Account.error,
   user: state.Auth.user,
   isUpdated: state.Account.isUpdated,
-  transactions: state.Account.transactions
+  transactions: state.Account.transactions,
 });
 
 export default connect(mapStateToProps, {
@@ -341,6 +351,6 @@ export default connect(mapStateToProps, {
   AddCash: AddMoney,
   Transfer: transferMoney,
   getTransactions: getTransation,
-  Alert
+  Alert,
 })(Dashboard);
 // export default Dashboard;

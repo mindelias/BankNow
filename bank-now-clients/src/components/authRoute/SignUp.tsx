@@ -21,12 +21,13 @@ interface props {
 const SignUp: React.FC<props> = ({ reg, Auth, Alert, error, loading }) => {
   const history = useHistory();
   useEffect(() => {
-    if (Auth == true) {
+    if (Auth === true) {
       history.push("/createacc");
     }
     if (error) {
       Alert(error["issue"], "danger");
     }
+    // eslint-disable-next-line
   }, [reg, Auth, error]);
   // const []
   const [user, setUser] = useState({
@@ -34,7 +35,7 @@ const SignUp: React.FC<props> = ({ reg, Auth, Alert, error, loading }) => {
     email: "",
     phoneNumber: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
   const { fullName, phoneNumber, email, password, confirmPassword } = user;
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -63,7 +64,6 @@ const SignUp: React.FC<props> = ({ reg, Auth, Alert, error, loading }) => {
     <div>
       <MainNav />
       <LoginWrapper className="container">
-
         {loading ? (
           <div className="loader">
             <img
@@ -73,76 +73,76 @@ const SignUp: React.FC<props> = ({ reg, Auth, Alert, error, loading }) => {
             />
           </div>
         ) : (
-            <div className="row">
-              <div className="col-6 bg-right text-center">
-                <img src={financee} alt="sigup image" />
-              </div>
-              <div className="formview col-md-6 col-xs-12">
-                <form className="" onSubmit={handleSubmit}>
-                  <h5 className="text-center my-3"> Register to get started </h5>
-                  <AlertView />
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="fullname"
-                      name="fullName"
-                      placeholder="Enter fullname"
-                      value={fullName}
-                      onChange={onchangeInput}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      type="email"
-                      className="form-control"
-                      id="email"
-                      placeholder="Enter email"
-                      name="email"
-                      value={email}
-                      onChange={onchangeInput}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="email"
-                      placeholder="Enter Phone number"
-                      name="phoneNumber"
-                      value={phoneNumber}
-                      onChange={onchangeInput}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      type="password"
-                      className="form-control"
-                      placeholder="Enter password"
-                      name="password"
-                      value={password}
-                      onChange={onchangeInput}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      type="password"
-                      className="form-control"
-                      id="pwd"
-                      placeholder="Confirm password"
-                      name="confirmPassword"
-                      value={confirmPassword}
-                      onChange={onchangeInput}
-                    />
-                  </div>
-
-                  <button type="submit" className="btn btn-info btn-block">
-                    Register
-              </button>
-                </form>
-              </div>
+          <div className="row">
+            <div className="col-6 bg-right text-center">
+              <img src={financee} alt="sigup-igs" />
             </div>
-          )}
+            <div className="formview col-md-6 col-xs-12">
+              <form className="" onSubmit={handleSubmit}>
+                <h5 className="text-center my-3"> Register to get started </h5>
+                <AlertView />
+                <div className="form-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="fullname"
+                    name="fullName"
+                    placeholder="Enter fullname"
+                    value={fullName}
+                    onChange={onchangeInput}
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    placeholder="Enter email"
+                    name="email"
+                    value={email}
+                    onChange={onchangeInput}
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="email"
+                    placeholder="Enter Phone number"
+                    name="phoneNumber"
+                    value={phoneNumber}
+                    onChange={onchangeInput}
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    type="password"
+                    className="form-control"
+                    placeholder="Enter password"
+                    name="password"
+                    value={password}
+                    onChange={onchangeInput}
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="pwd"
+                    placeholder="Confirm password"
+                    name="confirmPassword"
+                    value={confirmPassword}
+                    onChange={onchangeInput}
+                  />
+                </div>
+
+                <button type="submit" className="btn btn-info btn-block">
+                  Register
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
       </LoginWrapper>
     </div>
   );

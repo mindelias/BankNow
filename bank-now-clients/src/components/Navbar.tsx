@@ -8,6 +8,7 @@ function NavBar() {
 
   const toggleButton = () => {
     setIsOpen(!isOpen);
+    setActive(false)
   };
 
   

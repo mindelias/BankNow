@@ -1,4 +1,3 @@
-import React from "react";
 import {
   AUTH_ERROR,
   REGISTER_FAIL,
@@ -8,7 +7,7 @@ import {
   LOGOUT,
   USER_LOADED,
   ADMIN_LOADED,
-  SET_LOADING
+  SET_LOADING,
 } from "../types";
 
 const initialState = {
@@ -17,7 +16,7 @@ const initialState = {
   user: null,
   isAuthenticated: null,
   loading: false,
-  error: null
+  error: null,
 };
 
 function AuthReduce(state = initialState, action: any) {

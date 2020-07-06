@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 import financee from "../assets/finance.svg";
 import loader from "../assets/loader.svg";
 import { connect } from "react-redux";
-import { Register, Login } from "../redux/Auth/Auth.action";
+import { Login } from "../redux/Auth/Auth.action";
 import MainNav from "../MainNav";
 import AlertView from "../layouts/Alert";
 import { Alert } from "../redux/alert/AlertAction";
@@ -21,12 +21,13 @@ interface props {
 const SignIn: React.FC<props> = ({ reg, Auth, Alert, error, loading }) => {
   const history = useHistory();
   useEffect(() => {
-    if (Auth == true) {
+    if (Auth === true) {
       history.push("/createacc");
     }
     if (error) {
       Alert(error, "danger");
     }
+    // eslint-disable-next-line
   }, [reg, Auth, error]);
 
   const [user, setUser] = useState({
@@ -63,7 +64,7 @@ const SignIn: React.FC<props> = ({ reg, Auth, Alert, error, loading }) => {
         ) : (
           <div className="row">
             <div className="col-6 bg-right text-center">
-              <img src={financee} alt="signin image" />
+              <img src={financee} alt="signin-pfx"  />
             </div>
             <div className="formview col-md-6 col-xs-12">
               <form className="" onSubmit={handleSubmit}>

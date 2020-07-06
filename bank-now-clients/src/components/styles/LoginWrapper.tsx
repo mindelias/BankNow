@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import finance from "../assets/finance.svg";
+
 
 const LoginWrapper = styled.div`
   /* max-height:36em; */

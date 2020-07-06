@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect, Route } from "react-router";
 
-import { loadUser } from "../components/redux/Auth/Auth.action";
 
 interface props {
   //   load: () => void;

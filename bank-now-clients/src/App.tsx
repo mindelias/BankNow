@@ -4,10 +4,10 @@ import {
   BrowserRouter as Router,
   Switch, // for server rendering
   Route,
-  Redirect
+  
 } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from "./components/Navbar";
+ 
 import HomePage from "./components/Homepage";
 import PrivateRoute from "./utils/PrivateRoute";
 // import logo from './logo.svg';

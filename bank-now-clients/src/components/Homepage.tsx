@@ -1,8 +1,5 @@
 import React from "react";
 import ladycoin from "./assets/ladycoin.jpeg";
-// import capture from "./assets/capture.png";
-// import pexels from "./assets/pexels.jpeg";
-import float from "./assets/float.png";
 import styled from "styled-components";
 import { ButtonCont1, ButtonCont2 } from "./assets/Button";
 import Navbar from "./Navbar";

@@ -10,8 +10,10 @@ interface props {
 const AllDetails: React.FC<props> = ({ getDetails, users }) => {
   useEffect(() => {
     getDetails();
+    // eslint-disable-next-line
   }, []);
-  return (<div className = 'container'>
+  return (
+    <div className="container">
       <table className="table">
         <thead>
           <tr>
@@ -26,29 +28,33 @@ const AllDetails: React.FC<props> = ({ getDetails, users }) => {
           </tr>
         </thead>
         <tbody>
-           {users.length > 0  &&
+          {users.length > 0 &&
             users.map((item: any, index: number) => (
               <tr key={item.id}>
                 <th scope="row">{index}</th>
                 <td>{item.fullName}</td>
                 <td>{item.email}</td>
                 <td>{item.phoneNumber}</td>
-                <td>{item.Accounts.map((value:any) => value.accountBalance)}</td>
-                <td>{item.Accounts.map((value:any) => value.accountNumber)}</td>
-                <td>{item.Accounts.map((value:any) => value.accountType)}</td>
+                <td>
+                  {item.Accounts.map((value: any) => value.accountBalance)}
+                </td>
+                <td>
+                  {item.Accounts.map((value: any) => value.accountNumber)}
+                </td>
+                <td>{item.Accounts.map((value: any) => value.accountType)}</td>
                 <td>{new Date(item.createdAt).toDateString()}</td>
-                 
               </tr>
-            ))} 
+            ))}
         </tbody>
       </table>
-    </div>)
+    </div>
+  );
 };
 
 const mapStateToProps = (state: any) => ({
-  users: state.Auth.users
+  users: state.Auth.users,
 });
 
 export default connect(mapStateToProps, {
-  getDetails: getAllUsersDetailsForAdmin
+  getDetails: getAllUsersDetailsForAdmin,
 })(AllDetails);

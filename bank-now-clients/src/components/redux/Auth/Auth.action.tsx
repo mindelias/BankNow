@@ -53,6 +53,7 @@ export const Register = (data: formData) => async (dispatch: any) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
     },
   };
   try {
@@ -85,6 +86,7 @@ export const Login = (data: loginData) => async (dispatch: any) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
     },
   };
   try {

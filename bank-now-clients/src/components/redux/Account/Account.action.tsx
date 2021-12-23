@@ -47,6 +47,7 @@ export const CreateAcc = (data: formData) => async (dispatch: any) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
     },
   };
   try {
@@ -71,6 +72,7 @@ export const AddMoney = (data: depositType) => async (dispatch: any) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
     },
   };
   try {
@@ -97,6 +99,7 @@ export const transferMoney = (data: AmountType) => async (dispatch: any) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
     },
   };
   try {
